@@ -1,0 +1,28 @@
+[db_master]
+${db_master}
+
+[db_slave]
+${db_slave}
+
+[monitoring]
+${monitoring}
+
+[fileserver]
+${fileserver}
+
+
+[load_balancer]
+${load_balancer}
+
+[word_press]
+%{ for index, ip4 in word_press ~}
+${ip4} 
+%{ endfor ~}
+
+
+
+# Use one of the machines with floating_ip as ssh jumper
+[all:vars]
+host_key_checking = False
+ansible_user=ubuntu
+ansible_ssh_common_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand="ssh -W %h:%p -q ubuntu@${floating_ip}"'

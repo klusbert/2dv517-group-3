@@ -11,7 +11,7 @@ resource "local_file" "AnsibleInventory" {
 
     }
   )
-  filename = "./output/inventory"
+  filename = "./ansible-configuration/inventory.cfg"
 }
 
 resource "local_file" "HostFile" {
@@ -33,5 +33,5 @@ resource "local_file" "DeviceFile" {
   content = templatefile("./template/device.tmpl",
     { device_id = openstack_compute_volume_attach_v2.va_1.device }
   )
-  filename = "./ansible-configuration/var.yml"
+  filename = "./ansible-configuration/fileserver/var.yml"
 }

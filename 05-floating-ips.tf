@@ -9,10 +9,12 @@ resource "openstack_networking_floatingip_v2" "fip_2" {
 
 
 resource "openstack_compute_floatingip_associate_v2" "fip_1" {
-  floating_ip = "${openstack_networking_floatingip_v2.fip_1.address}"
-  instance_id = "${openstack_compute_instance_v2.load_balancer.id}"
+  floating_ip = openstack_networking_floatingip_v2.fip_1.address
+  instance_id = openstack_compute_instance_v2.load_balancer.id
 }
 resource "openstack_compute_floatingip_associate_v2" "fip_2" {
-  floating_ip = "${openstack_networking_floatingip_v2.fip_2.address}"
-  instance_id = "${openstack_compute_instance_v2.monitoring.id}"
+  floating_ip = openstack_networking_floatingip_v2.fip_2.address
+  instance_id = openstack_compute_instance_v2.monitoring.id
+
+
 }

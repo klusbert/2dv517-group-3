@@ -3,7 +3,7 @@ resource "openstack_compute_instance_v2" "word_press" {
   image_id          = var.image_id
   flavor_id         = var.flavor_id
   key_pair          = var.key_pair
-  count             = 3
+  count             = var.wordpress_instances
   name              = format("%s-%02d", "word_press", count.index + 1)
   security_groups   = ["default"]
   availability_zone = var.availability_zone

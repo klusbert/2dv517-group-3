@@ -20,10 +20,10 @@ variable "image_id"{
 }
 variable "flavor_id"{
     type = string
-    default = "c1-r1-d5"
+    default = "c1-r1-d10"
 }
 variable "router_name" {
-    type = string
+    type = string 
     default = "project_router"
 }
 
@@ -31,7 +31,12 @@ variable "network_name" {
     type = string
     default = "project_network"
 }
+variable "subnet_name"{
+    type = string
+    default = "project_subnet"
+}
 variable "wordpress_instances" {
+    type = number
     description = "The Number of instances to be created."
     default  = 3
 }

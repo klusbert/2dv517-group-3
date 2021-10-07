@@ -38,7 +38,7 @@ variable "subnet_name"{
 variable "wordpress_instances" {
     type = number
     description = "The Number of instances to be created."
-    default  = 1
+    default  = 3
 }
 
 variable "floating_ip_pool" {

@@ -12,7 +12,7 @@ variable "availability_zone" {
 }
 variable "key_pair"{
     type = string
-    default = "mykey"
+    default = "cn222tm_Keypair"
 }
 variable "image_id"{
     type = string

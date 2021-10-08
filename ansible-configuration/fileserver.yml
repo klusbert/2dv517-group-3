@@ -1,4 +1,8 @@
-- name: Test Ping
-  hosts: all
-  tasks:
-  - action: ping
+---
+- hosts: fileserver
+  become: true
+  tasks: 
+    - name: Create a ext4 filesystem on /dev/sdb1 and check disk blocks
+      community.general.filesystem:
+        fstype: ext4
+        dev: /dev/sdb

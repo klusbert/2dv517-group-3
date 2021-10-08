@@ -1,8 +1,21 @@
+#https://stackoverflow.com/questions/55511770/detect-and-mount-filesystem-in-ansible
+
 ---
 - hosts: fileserver
   become: true
-  tasks: 
-    - name: Create a ext4 filesystem on /dev/sdb1 and check disk blocks
+  tasks:     
+    - name: Create a ext4 filesystem on /dev/sdb and check disk blocks
       community.general.filesystem:
         fstype: ext4
-        dev: /dev/sdb
+        dev: "{{device_id}}"
+    - name: Mount File System
+      mount:
+        path: /mnt/nfs_export
+        src: "{{device_id}}"
+        fstype: ext4
+        state: mounted
+    - name: install nfs server
+      action: apt pkg=nfs-kernel-server state=present update_cache=yes
+
+
+

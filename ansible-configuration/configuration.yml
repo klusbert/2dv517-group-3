@@ -11,5 +11,4 @@
         name: "*"
         state: latest
 
-
 - import_playbook: "fileserver.yml"

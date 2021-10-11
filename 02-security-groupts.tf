@@ -16,7 +16,10 @@ resource "openstack_compute_secgroup_v2" "http" {
   }
 }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> fileserver
 resource "openstack_compute_secgroup_v2" "icmp" {
   name          = "ICMP"
   description   = "ICMP rules for ping"
@@ -37,4 +40,8 @@ resource "openstack_compute_secgroup_v2" "ssh" {
     ip_protocol = "tcp"
     cidr        = "0.0.0.0/0"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> fileserver

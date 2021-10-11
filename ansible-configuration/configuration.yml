@@ -12,3 +12,4 @@
         state: latest
 
 - import_playbook: "fileserver.yml"
+- import_playbook: "master.yaml"

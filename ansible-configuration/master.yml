@@ -1,10 +1,10 @@
+---
 - hosts: db_master
-  user: ubuntu
   become: true
-
   tasks:
-    - name: Install mySQL
-      action: apt pkg=$item state=installed
-      with_items:
-        - mysql-server
-        - mysql-client
+    - name: Install mySQL-server
+      action: apt pkg=mysql-server state=present
+    - name: Install mySQL-client
+      action: apt pkg=mysql-client state=present
+    - name: Update password
+      mysql_user: name=root host={{}}

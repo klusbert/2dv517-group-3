@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Update cache 
+      apt:
+       update_cache: yes
+         
+    - name: Upgrade all packages on servers
+      apt: 
+        name: "*"
+        state: latest
+
+- import_playbook: "fileserver.yml"

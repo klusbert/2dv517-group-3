@@ -3,7 +3,7 @@ resource "openstack_compute_instance_v2" "word_press" {
   image_id          = var.image_id
   flavor_id         = var.flavor_id
   key_pair          = var.key_pair
-  count             = 3
+  count             = var.wordpress_instances
   name              = format("%s-%02d", "word_press", count.index + 1)
   security_groups   = ["default"]
   availability_zone = var.availability_zone
@@ -51,7 +51,11 @@ resource "openstack_compute_instance_v2" "load_balancer" {
   image_id          = var.image_id
   flavor_id         = var.flavor_id
   key_pair          = var.key_pair
-  security_groups   = ["default", "${openstack_compute_secgroup_v2.http.name}"]
+<<<<<<< HEAD
+  security_groups   = ["default", "${openstack_compute_secgroup_v2.http.name}","${openstack_compute_secgroup_v2.ssh.name}","${openstack_compute_secgroup_v2.icmp.name}"]
+=======
+  security_groups   = ["default","${openstack_compute_secgroup_v2.http.name}","${openstack_compute_secgroup_v2.ssh.name}","${openstack_compute_secgroup_v2.icmp.name}"]
+>>>>>>> fileserver
   availability_zone = var.availability_zone
   depends_on = [
     openstack_networking_subnet_v2.subnet_1
@@ -66,7 +70,11 @@ resource "openstack_compute_instance_v2" "monitoring" {
   image_id          = var.image_id
   flavor_id         = var.flavor_id
   key_pair          = var.key_pair
-  security_groups   = ["default", "${openstack_compute_secgroup_v2.http.name}"]
+<<<<<<< HEAD
+  security_groups   = ["default", "${openstack_compute_secgroup_v2.http.name}","${openstack_compute_secgroup_v2.ssh.name}","${openstack_compute_secgroup_v2.icmp.name}"]
+=======
+  security_groups   = ["default","${openstack_compute_secgroup_v2.http.name}","${openstack_compute_secgroup_v2.ssh.name}","${openstack_compute_secgroup_v2.icmp.name}"]
+>>>>>>> fileserver
   availability_zone = var.availability_zone
   depends_on = [
     openstack_networking_subnet_v2.subnet_1

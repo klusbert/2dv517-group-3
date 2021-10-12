@@ -10,6 +10,7 @@ resource "null_resource" "provisioner" {
   triggers = {
     always_run = "${timestamp()}"
   }
+
   provisioner "local-exec" {
     command = "ansible-playbook -i './ansible-configuration/inventory.cfg' ./ansible-configuration/configuration.yml"
   }

@@ -26,9 +26,10 @@ resource "local_file" "HostFile" {
 
     }
   )
-  filename = "./output/hosts"
+  filename = "./ansible-configuration/exports/hosts"
 }
 
+# Export the device id to ansible.
 resource "local_file" "DeviceFile" {
   content = templatefile("./template/device.tmpl",
     { device_id = openstack_compute_volume_attach_v2.va_1.device }

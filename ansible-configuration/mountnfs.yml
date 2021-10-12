@@ -1,0 +1,15 @@
+---
+- hosts: all,!fileserver # do not mount on the fileserver.
+  become: true 
+  tasks: 
+    - name: "Create directory"
+      ansible.builtin.file:
+        path: /home/ubuntu/nfs_fileserver
+        state  : directory
+        mode: '0755'
+    - name: "Mount nfs server"
+      mount: 
+          src: "fileserver:{{mount_path}}" 
+          path: /home/ubuntu/nfs_fileserver
+          fstype: nfs
+          state: mounted

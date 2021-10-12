@@ -4,10 +4,10 @@
 192.168.199.8 db_slave
 192.168.199.11 monitoring
 192.168.199.14 fileserver
-192.168.199.6 load_balancer
+192.168.199.20 load_balancer
 
-192.168.199.15 word_press-01 
-192.168.199.16 word_press-02 
+192.168.199.16 word_press-01 
+192.168.199.6 word_press-02 
 192.168.199.10 word_press-03 
 
 # The following lines are desirable for IPv6 capable hosts

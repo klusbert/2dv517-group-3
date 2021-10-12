@@ -53,3 +53,10 @@ resource "local_file" "AnsibleVariables" {
   )
   filename = "./ansible-configuration/group_vars/all.yml"
 }
+
+resource "local_file" "nginx_loadbalancer"{
+  content = templatefile("./template/load_balancer.tmpl",
+   { word_press    = openstack_compute_instance_v2.word_press.*}
+  )
+  filename = "./ansible-configuration/exports/nginx.conf.j2"
+}

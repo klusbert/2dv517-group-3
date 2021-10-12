@@ -1,5 +1,12 @@
 username: ubuntu
 mount_path: /mnt/nfs_share
+
+#Floating ips
+${load_balancer.name}: ${load_balancer_floating_ip}
+${monitoring.name}: ${monitoring_floating_ip}
+
+
+#private ips
 ${db_master.name}: ${db_master.access_ip_v4}
 ${db_slave.name}: ${db_slave.access_ip_v4}
 ${monitoring.name}: ${monitoring.access_ip_v4} 

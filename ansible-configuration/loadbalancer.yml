@@ -1,0 +1,8 @@
+---
+- hosts: load_balancer
+  become: true
+  tasks: 
+    - name: Install Nginx
+      apt:
+        name: ['nginx']
+        state: latest

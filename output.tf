@@ -40,6 +40,8 @@ resource "local_file" "DeviceFile" {
 resource "local_file" "AnsibleVariables" {
   content = templatefile("./template/all.tmpl",
   { username = "ubuntu",
+    load_balancer_floating_ip = openstack_networking_floatingip_v2.fip_1.address,
+    monitoring_floating_ip = openstack_networking_floatingip_v2.fip_2.address,
     db_master = openstack_compute_instance_v2.db_master,
     db_slave = openstack_compute_instance_v2.db_slave,
     fileserver = openstack_compute_instance_v2.fileserver,

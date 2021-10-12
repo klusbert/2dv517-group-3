@@ -26,12 +26,28 @@ resource "local_file" "HostFile" {
 
     }
   )
-  filename = "./output/hosts"
+  filename = "./ansible-configuration/exports/hosts"
 }
 
+# Export the device id to ansible.
 resource "local_file" "DeviceFile" {
   content = templatefile("./template/device.tmpl",
     { device_id = openstack_compute_volume_attach_v2.va_1.device }
   )
   filename = "./ansible-configuration/group_vars/fileserver.yml"
+}
+
+resource "local_file" "AnsibleVariables" {
+  content = templatefile("./template/all.tmpl",
+  { username = "ubuntu",
+    db_master = openstack_compute_instance_v2.db_master,
+    db_slave = openstack_compute_instance_v2.db_slave,
+    fileserver = openstack_compute_instance_v2.fileserver,
+    monitoring = openstack_compute_instance_v2.monitoring,
+    fileserver    = openstack_compute_instance_v2.fileserver,
+    load_balancer = openstack_compute_instance_v2.load_balancer,
+    word_press    = openstack_compute_instance_v2.word_press.*
+    }
+  )
+  filename = "./ansible-configuration/group_vars/all.yml"
 }

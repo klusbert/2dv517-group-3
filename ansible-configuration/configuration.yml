@@ -10,6 +10,8 @@
       apt: 
         name: "*"
         state: latest
+    - name: Install nfs client on all instances.
+      action: apt pkg=nfs-common state=present
 
 - import_playbook: "fileserver.yml"
 - import_playbook: "master.yaml"

@@ -1,2 +1,11 @@
 username: ubuntu
+mount_path: /mnt/nfs_share
+db_master: 192.168.199.9
+db_slave: 192.168.199.8
+monitoring: 192.168.199.11 
+fileserver: 192.168.199.14 
+load_balancer: 192.168.199.6
 
+word_press-01: 192.168.199.15 
+word_press-02: 192.168.199.16 
+word_press-03: 192.168.199.10 

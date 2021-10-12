@@ -51,7 +51,11 @@ resource "openstack_compute_instance_v2" "load_balancer" {
   image_id          = var.image_id
   flavor_id         = var.flavor_id
   key_pair          = var.key_pair
+<<<<<<< HEAD
   security_groups   = ["default", "${openstack_compute_secgroup_v2.http.name}","${openstack_compute_secgroup_v2.ssh.name}","${openstack_compute_secgroup_v2.icmp.name}"]
+=======
+  security_groups   = ["default","${openstack_compute_secgroup_v2.http.name}","${openstack_compute_secgroup_v2.ssh.name}","${openstack_compute_secgroup_v2.icmp.name}"]
+>>>>>>> bf7236d213dc76bc9c7c85de2feafb117aeab2c3
   availability_zone = var.availability_zone
   depends_on = [
     openstack_networking_subnet_v2.subnet_1
@@ -66,7 +70,11 @@ resource "openstack_compute_instance_v2" "monitoring" {
   image_id          = var.image_id
   flavor_id         = var.flavor_id
   key_pair          = var.key_pair
+<<<<<<< HEAD
   security_groups   = ["default", "${openstack_compute_secgroup_v2.http.name}","${openstack_compute_secgroup_v2.ssh.name}","${openstack_compute_secgroup_v2.icmp.name}"]
+=======
+  security_groups   = ["default","${openstack_compute_secgroup_v2.http.name}","${openstack_compute_secgroup_v2.ssh.name}","${openstack_compute_secgroup_v2.icmp.name}"]
+>>>>>>> bf7236d213dc76bc9c7c85de2feafb117aeab2c3
   availability_zone = var.availability_zone
   depends_on = [
     openstack_networking_subnet_v2.subnet_1

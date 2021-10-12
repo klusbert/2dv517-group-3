@@ -1,1 +1,5 @@
 device_id: /dev/sdb
+<<<<<<< HEAD
+=======
+mount_path: /mnt/nfs_share
+>>>>>>> bf7236d213dc76bc9c7c85de2feafb117aeab2c3

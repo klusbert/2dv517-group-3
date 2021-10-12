@@ -1,8 +1,4 @@
 username: ubuntu
-<<<<<<< HEAD
-mount_path: /mnt/nfs_share
-=======
->>>>>>> bf7236d213dc76bc9c7c85de2feafb117aeab2c3
 ${db_master.name}: ${db_master.access_ip_v4}
 ${db_slave.name}: ${db_slave.access_ip_v4}
 ${monitoring.name}: ${monitoring.access_ip_v4} 
@@ -11,8 +7,4 @@ ${load_balancer.name}: ${load_balancer.access_ip_v4}
 
 %{ for index, server in word_press ~}
 ${server.name}: ${server.access_ip_v4} 
-<<<<<<< HEAD
 %{ endfor ~}
-=======
-%{ endfor ~}
->>>>>>> bf7236d213dc76bc9c7c85de2feafb117aeab2c3

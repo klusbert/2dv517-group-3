@@ -1,0 +1,22 @@
+events {
+    worker_connections 1024;
+}
+http {
+    upstream wordpress {
+        #server srv1.example.com;
+        #server srv2.example.com;
+        #server srv3.example.com;
+        server 192.168.199.16;
+        server 192.168.199.6;
+        server 192.168.199.10;
+
+    }
+
+    server {
+        listen 80;
+
+        location / {
+            proxy_pass http://wordpress;
+        }
+    }
+}

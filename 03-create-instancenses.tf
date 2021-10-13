@@ -51,6 +51,7 @@ resource "openstack_compute_instance_v2" "load_balancer" {
   image_id          = var.image_id
   flavor_id         = var.flavor_id
   key_pair          = var.key_pair
+
   security_groups   = ["default", "${openstack_compute_secgroup_v2.http.name}", "${openstack_compute_secgroup_v2.ssh.name}", "${openstack_compute_secgroup_v2.icmp.name}"]
   availability_zone = var.availability_zone
   depends_on = [

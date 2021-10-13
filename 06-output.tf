@@ -39,24 +39,31 @@ resource "local_file" "DeviceFile" {
 
 resource "local_file" "AnsibleVariables" {
   content = templatefile("./template/all.tmpl",
-  { username = "ubuntu",
-    load_balancer_floating_ip = openstack_networking_floatingip_v2.fip_1.address,
-    monitoring_floating_ip = openstack_networking_floatingip_v2.fip_2.address,
-    db_master = openstack_compute_instance_v2.db_master,
-    db_slave = openstack_compute_instance_v2.db_slave,
-    fileserver = openstack_compute_instance_v2.fileserver,
-    monitoring = openstack_compute_instance_v2.monitoring,
-    fileserver    = openstack_compute_instance_v2.fileserver,
-    load_balancer = openstack_compute_instance_v2.load_balancer,
-    word_press    = openstack_compute_instance_v2.word_press.*
+    { username                  = "ubuntu",
+      load_balancer_floating_ip = openstack_networking_floatingip_v2.fip_1.address,
+      monitoring_floating_ip    = openstack_networking_floatingip_v2.fip_2.address,
+      db_master                 = openstack_compute_instance_v2.db_master,
+      db_slave                  = openstack_compute_instance_v2.db_slave,
+      fileserver                = openstack_compute_instance_v2.fileserver,
+      monitoring                = openstack_compute_instance_v2.monitoring,
+      fileserver                = openstack_compute_instance_v2.fileserver,
+      load_balancer             = openstack_compute_instance_v2.load_balancer,
+      word_press                = openstack_compute_instance_v2.word_press.*
     }
   )
   filename = "./ansible-configuration/group_vars/all.yml"
 }
 
-resource "local_file" "nginx_loadbalancer"{
+resource "local_file" "nginx_loadbalancer" {
   content = templatefile("./template/load_balancer.tmpl",
-   { word_press    = openstack_compute_instance_v2.word_press.*}
+    { word_press = openstack_compute_instance_v2.word_press.* }
   )
   filename = "./ansible-configuration/exports/nginx.conf.j2"
+}
+
+resource "local_file" "private_key" {
+  content = templatefile("./template/privatekey.tmpl",
+    { private_key = openstack_compute_keypair_v2.project_keypair.private_key }
+  )
+  filename = "./secrets/private_key.pem"
 }

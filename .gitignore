@@ -1,5 +1,7 @@
-#ignore secrets
-secrets/
+#ignore sh files in secrets secrets
+**/secrets/*.sh
+*.pem
+
 
 # Local .terraform directories
 **/.terraform/*

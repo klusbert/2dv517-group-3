@@ -10,10 +10,6 @@ variable "availability_zone" {
   type = string
   default = "Education"
 }
-variable "key_pair"{
-    type = string
-    default = "mykey"
-}
 variable "image_id"{
     type = string
     default = "ca4bec1a-ac25-434f-b14c-ad8078ccf39f"

@@ -23,4 +23,4 @@
 - import_playbook: "fileserver.yml"
 - import_playbook: "mountnfs.yml"
 - import_playbook: "fileserver.yml"
-- import_playbook: "master.yaml"
+- import_playbook: "master.yml"

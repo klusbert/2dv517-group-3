@@ -2,12 +2,12 @@
 - hosts: all
   become: true
   tasks:
-    - name: Update cache 
+    - name: Update cache
       apt:
        update_cache: yes
-         
+
     - name: Upgrade all packages on servers
-      apt: 
+      apt:
         name: "*"
         state: latest
     - name: Install nfs client on all instances.
@@ -17,4 +17,5 @@
 - import_playbook: "mountnfs.yml"
 - import_playbook: "loadbalancer.yml"
 - import_playbook: "master.yaml"
+- import_playbook: "monitoring.yaml"
 

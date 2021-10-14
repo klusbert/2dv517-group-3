@@ -1,0 +1,30 @@
+{
+    "variables": {
+        "os_auth_url": "{{ env `OS_AUTH_URL` }}",
+        "os_username": "{{ env `OS_USERNAME` }}",
+        "os_password": "{{ env `OS_PASSWORD` }}"
+    },
+    "builders": [
+        {
+            "type": "openstack",
+            "username": "{{user `os_username`}}",
+            "password": "{{user `os_password`}}",
+            "identity_endpoint": "{{user `os_auth_url`}}",
+            "region": "RegionOne",
+            "image_name": "{{user `image_name`}}",
+            "ssh_username": "ubuntu",
+            "source_image": "ca4bec1a-ac25-434f-b14c-ad8078ccf39f",
+            "flavor": "c1-r1-d10",
+            "ssh_ip_version": "4",
+            "availability_zone": "Education",
+            "floating_ip_network": "public",
+            "networks": []
+        }
+    ],
+    "provisioners": [
+        {
+            "script": "cloud-init.sh",
+            "type": "shell"
+        }
+    ]
+}

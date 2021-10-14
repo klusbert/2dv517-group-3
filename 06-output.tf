@@ -61,9 +61,4 @@ resource "local_file" "nginx_loadbalancer" {
   filename = "./ansible-configuration/exports/nginx.conf.j2"
 }
 
-resource "local_file" "private_key" {
-  content = templatefile("./template/privatekey.tmpl",
-    { private_key = openstack_compute_keypair_v2.project_keypair.private_key }
-  )
-  filename = "./secrets/private_key.pem"
-}
+

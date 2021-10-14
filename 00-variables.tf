@@ -12,7 +12,7 @@ variable "availability_zone" {
 }
 variable "image_id"{
     type = string
-    default = "ca4bec1a-ac25-434f-b14c-ad8078ccf39f"
+    default = "baa8f7a5-2ebc-44c2-a44f-58dcf5da6558"
 }
 variable "flavor_id"{
     type = string
@@ -35,6 +35,11 @@ variable "wordpress_instances" {
     type = number
     description = "The Number of instances to be created."
     default  = 3
+}
+
+variable "baked_image"{
+    type = string
+    default = "baked_image"
 }
 
 variable "floating_ip_pool" {

@@ -6,5 +6,15 @@
       action: apt pkg=mysql-server state=present
     - name: Install mySQL-client
       action: apt pkg=mysql-client state=present
+    - name: Install python
+      action: apt pkg=python-minimal state=present
     - name: Update password
-      mysql_user: name=root host={{}}
+      mysql_user: name=root host={{db_master}} password=mysql
+      with_items:
+        - 127.0.0.1
+        - ::1
+        - localhost
+    - name: Run backup sql
+      mysql_db:
+        state: import
+        target:  ../assets/database/backup.sql

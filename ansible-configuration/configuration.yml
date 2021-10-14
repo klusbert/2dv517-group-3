@@ -14,4 +14,4 @@
       action: apt pkg=nfs-common state=present
 
 - import_playbook: "fileserver.yml"
-- import_playbook: "master.yaml"
+- import_playbook: "master.yml"

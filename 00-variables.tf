@@ -12,7 +12,7 @@ variable "availability_zone" {
 }
 variable "key_pair"{
     type = string
-    default = "mykey"
+    default = "oh222gw_Keypair"
 }
 variable "image_id"{
     type = string
@@ -23,7 +23,7 @@ variable "flavor_id"{
     default = "c1-r1-d10"
 }
 variable "router_name" {
-    type = string 
+    type = string
     default = "project_router"
 }
 

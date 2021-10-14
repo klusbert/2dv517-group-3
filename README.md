@@ -13,6 +13,7 @@
 8. Run terraform apply -parallelism 1 (you can try increase it more than 1 but beware that running to many parallels could cause problems I ran 3 last time and it worked)
 
 
+Install ansible comunity.general package "ansible-galaxy collection install community.general"
 # Usefully commands
 | Title                                 | Command                                     |
 |---------------------------------------|---------------------------------------------|

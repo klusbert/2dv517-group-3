@@ -2,9 +2,39 @@
 - hosts: db_master
   become: true
   tasks:
-    - name: Install mySQL-server
+    - name: Install ansible mysql dependency
+      apt:
+        name: python3-mysqldb
+        state: latest
+    - name: install mqsql server
       action: apt pkg=mysql-server state=present
-    - name: Install mySQL-client
+    - name: install mqsql client
       action: apt pkg=mysql-client state=present
-    - name: Update password
-      mysql_user: name=root host={{}}
+    - name: Remove anon user
+      community.mysql.mysql_user:
+        name: ''
+        host: 'localhost'
+        state: absent
+    - name: Create database user with all access
+      community.mysql.mysql_user:
+        name: admin
+        password: test
+        priv: '*.*:ALL'
+        state: present
+    - name: Copy dump file
+      copy:
+        src: ../assets/database/backup.sql
+        dest: /tmp
+    - name: Restore database ignoring errors
+      community.mysql.mysql_db:
+        name: wordpress
+        state: import
+        target: /tmp/backup.sql
+    - name: Show database
+      community.mysql.mysql_query:
+        query: SHOW DATABASES
+    - name: Show tables in database
+      community.mysql.mysql_query:
+        login_db: wordpress
+        query: SHOW TABLES
+    

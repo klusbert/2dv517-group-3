@@ -1,0 +1,15 @@
+---
+- hosts: load_balancer
+  become: true
+  tasks: 
+    - name: Install Nginx
+      apt:
+        name: ['nginx']
+        state: latest
+    - name: Copy nginx.conf
+      copy:
+        src: ./exports/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+    - name: restart nginx server
+      service: name=nginx state=restarted
+

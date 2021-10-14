@@ -1,0 +1,22 @@
+events {
+    worker_connections 1024;
+}
+http {
+    upstream wordpress {
+        #server srv1.example.com;
+        #server srv2.example.com;
+        #server srv3.example.com;
+%{ for index, server in word_press ~}
+        server ${server.access_ip_v4};
+%{ endfor ~}
+
+    }
+
+    server {
+        listen 80;
+
+        location / {
+            proxy_pass http://wordpress;
+        }
+    }
+}

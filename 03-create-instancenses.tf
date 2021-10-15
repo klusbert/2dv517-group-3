@@ -8,7 +8,7 @@ resource "openstack_compute_instance_v2" "word_press" {
   security_groups   = ["default"]
   availability_zone = var.availability_zone
   depends_on = [
-    openstack_networking_subnet_v2.subnet_1
+    openstack_networking_router_interface_v2.router_interface_1
   ]
   network {
     name = openstack_networking_network_v2.network_1.name
@@ -23,7 +23,7 @@ resource "openstack_compute_instance_v2" "db_master" {
   availability_zone = var.availability_zone
   security_groups   = ["default"]
   depends_on = [
-    openstack_networking_subnet_v2.subnet_1
+    openstack_compute_instance_v2.word_press
   ]
   network {
     name = openstack_networking_network_v2.network_1.name
@@ -38,7 +38,7 @@ resource "openstack_compute_instance_v2" "db_slave" {
   availability_zone = var.availability_zone
   security_groups   = ["default"]
   depends_on = [
-    openstack_networking_subnet_v2.subnet_1
+    openstack_compute_instance_v2.word_press
   ]
   network {
     name = openstack_networking_network_v2.network_1.name
@@ -47,15 +47,15 @@ resource "openstack_compute_instance_v2" "db_slave" {
 
 
 resource "openstack_compute_instance_v2" "load_balancer" {
-  name              = "load_balancer"
-  image_id          = var.image_id
-  flavor_id         = var.flavor_id
-  key_pair          = var.key_pair
+  name      = "load_balancer"
+  image_id  = var.image_id
+  flavor_id = var.flavor_id
+  key_pair  = var.key_pair
 
   security_groups   = ["default", "${openstack_compute_secgroup_v2.http.name}", "${openstack_compute_secgroup_v2.ssh.name}", "${openstack_compute_secgroup_v2.icmp.name}"]
   availability_zone = var.availability_zone
   depends_on = [
-    openstack_networking_subnet_v2.subnet_1
+    openstack_compute_instance_v2.word_press
   ]
   network {
     name = openstack_networking_network_v2.network_1.name
@@ -70,7 +70,7 @@ resource "openstack_compute_instance_v2" "monitoring" {
   security_groups   = ["default", "${openstack_compute_secgroup_v2.http.name}", "${openstack_compute_secgroup_v2.ssh.name}", "${openstack_compute_secgroup_v2.icmp.name}"]
   availability_zone = var.availability_zone
   depends_on = [
-    openstack_networking_subnet_v2.subnet_1
+    openstack_compute_instance_v2.load_balancer,openstack_compute_instance_v2.db_slave,openstack_compute_instance_v2.db_master
   ]
   network {
     name = openstack_networking_network_v2.network_1.name
@@ -86,7 +86,7 @@ resource "openstack_compute_instance_v2" "fileserver" {
   security_groups   = ["default"]
   availability_zone = var.availability_zone
   depends_on = [
-    openstack_networking_subnet_v2.subnet_1
+    openstack_compute_instance_v2.load_balancer
   ]
   network {
     name = openstack_networking_network_v2.network_1.name

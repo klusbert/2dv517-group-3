@@ -1,8 +1,14 @@
 resource "openstack_networking_floatingip_v2" "fip_1" {
+  depends_on = [
+    openstack_compute_instance_v2.fileserver
+  ]
   pool = var.floating_ip_pool
 }
 
 resource "openstack_networking_floatingip_v2" "fip_2" {
+  depends_on = [
+    openstack_compute_instance_v2.fileserver
+  ]
   pool = var.floating_ip_pool
 }
 

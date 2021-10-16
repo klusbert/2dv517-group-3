@@ -14,6 +14,7 @@
 
 
 Install ansible community.general package "ansible-galaxy collection install community.general"
+Install ansible community.sql package "ansible-galaxy collection install community.mysql"
 
 
 # Usefully commands

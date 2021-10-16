@@ -13,3 +13,4 @@
           path: /home/ubuntu/nfs_fileserver
           fstype: nfs
           state: mounted
+

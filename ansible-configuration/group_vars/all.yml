@@ -2,17 +2,17 @@ username: ubuntu
 mount_path: /mnt/nfs_share
 
 #Floating ips
-load_balancer_floating: 194.47.177.23
-monitoring_floating: 194.47.176.50
+load_balancer_floating: 194.47.177.25
+monitoring_floating: 194.47.177.46
 
 
 #private ips
-db_master: 192.168.199.13
-db_slave: 192.168.199.11
-monitoring: 192.168.199.14 
-fileserver: 192.168.199.18 
-load_balancer: 192.168.199.6
+db_master: 192.168.199.7
+db_slave: 192.168.199.14
+monitoring: 192.168.199.20 
+fileserver: 192.168.199.10 
+load_balancer: 192.168.199.17
 
-word_press-01: 192.168.199.10 
-word_press-02: 192.168.199.7 
-word_press-03: 192.168.199.9 
+word_press-01: 192.168.199.6 
+word_press-02: 192.168.199.5 
+word_press-03: 192.168.199.15 

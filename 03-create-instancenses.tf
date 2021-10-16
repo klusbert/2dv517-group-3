@@ -70,7 +70,9 @@ resource "openstack_compute_instance_v2" "monitoring" {
   security_groups   = ["default", "${openstack_compute_secgroup_v2.http.name}", "${openstack_compute_secgroup_v2.ssh.name}", "${openstack_compute_secgroup_v2.icmp.name}"]
   availability_zone = var.availability_zone
   depends_on = [
-    openstack_compute_instance_v2.load_balancer,openstack_compute_instance_v2.db_slave,openstack_compute_instance_v2.db_master
+    openstack_compute_instance_v2.load_balancer,
+    openstack_compute_instance_v2.db_slave,
+    openstack_compute_instance_v2.db_master
   ]
   network {
     name = openstack_networking_network_v2.network_1.name
@@ -86,7 +88,9 @@ resource "openstack_compute_instance_v2" "fileserver" {
   security_groups   = ["default"]
   availability_zone = var.availability_zone
   depends_on = [
-    openstack_compute_instance_v2.load_balancer
+    openstack_compute_instance_v2.load_balancer,
+    openstack_compute_instance_v2.db_slave,
+    openstack_compute_instance_v2.db_master
   ]
   network {
     name = openstack_networking_network_v2.network_1.name

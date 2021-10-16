@@ -13,6 +13,7 @@
 
     - name: Install nfs client on all instances.
       action: apt pkg=nfs-common state=present
+      
     - name: Copy host file to /etc/hosts
       copy:
         src: ./exports/hosts

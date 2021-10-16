@@ -1,0 +1,87 @@
+#https://hevodata.com/learn/mysql-master-slave-replication/
+
+## rebuild master and slave!!
+---
+- hosts: database
+  become: true
+  vars_files:
+    - ../secrets/db_password.yml
+  tasks:
+    - name: Install ansible mysql dependency
+      apt:
+        name: python3-mysqldb
+        state: latest
+
+    - name: install mqsql server
+      action: apt pkg=mysql-server state=present
+
+    - name: install mqsql client
+      action: apt pkg=mysql-client state=present
+
+    - name: Create admin user
+      community.mysql.mysql_user:
+        name: admin
+        password: "{{root_password}}"
+        priv: '*.*:ALL'
+        state: present
+
+    - name: Specify grants composed of more than one word
+      community.mysql.mysql_user:
+       name: replication
+       password: "{{root_password}}"
+       priv: "*.*:REPLICATION CLIENT"
+       state: present
+
+      when: mysql_role == "master"
+
+    - name: Copy dump file
+      copy:
+        src: ../assets/database/backup.sql
+        dest: /tmp
+      when: mysql_role == "master"
+    - name: Restore database ignoring errors
+      community.mysql.mysql_db:
+        name: wordpress
+        state: import
+        target: /tmp/backup.sql
+      when: mysql_role == "master"
+
+    - name: copy global mysqld.cnf
+      template:
+        src: ./exports/mysqld.cnf.j2
+        dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+    - name: Restart mysql
+      service:
+        name: mysql
+        state: restarted
+
+    - name: Creates db directory to nfs server
+      file:
+        path: /home/ubuntu/nfs_fileserver/db
+        state: directory
+      when : mysql_role == "master"
+    - name: Dump all databases to the nfs_fileserver dump.sql including master data
+      community.mysql.mysql_db:
+       state: dump
+       name: all
+       target: /home/ubuntu/nfs_fileserver/db/dump.sql
+       master_data: 1
+      when : mysql_role == "master"
+
+    - name: Import master dump dump.sql
+      mysql_db:
+        login_user: admin
+        login_password: "{{root_password}}"
+        state: dump
+        name: all
+        target: /home/ubuntu/nfs_fileserver/db/dump.sql
+      when: mysql_role == "slave"
+    - name: Change primary to use replication delay 3600 seconds
+      community.mysql.mysql_replication:
+       mode: changemaster
+       login_user: admin
+       login_password: "{{root_password}}"
+       master_host: "{{db_master}}"
+       master_delay: 3600
+
+      when : mysql_role == "slave"

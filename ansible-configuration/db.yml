@@ -1,0 +1,100 @@
+#https://github.com/geerlingguy/ansible-role-mysql/tree/master/tasks
+#https://linuxhint.com/set_mysql_root_password_ansible/
+---
+- hosts: database
+  become: true
+  vars_files:
+    - ../secrets/db_password.yml
+  tasks:
+    - name: Install ansible mysql dependency
+      apt:
+        name: python3-mysqldb
+        state: latest
+
+    - name: install mqsql server
+      action: apt pkg=mysql-server state=present
+
+    - name: install mqsql client
+      action: apt pkg=mysql-client state=present
+
+    - name: copy global mysqld.cnf
+      template:
+        src: ./exports/mysqld.cnf.j2
+        dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+
+    - name: mysql needs a restart - Restart mysql
+      service:
+        name: mysql
+        state: restarted
+
+    - name: remove the test database
+      mysql_db: 
+        name=test 
+        state=absent
+    
+    - name: Create admin user
+      mysql_user: 
+        name: admin 
+        password: "{{root_password}}"
+        priv: '*.*:ALL'
+        state: present
+    
+    - name: Create the slave user
+      mysql_user: 
+        name: slave 
+        host: "%" 
+        password: "{{root_password}}"
+        priv: '*.*:REPLICATION SLAVE'
+        state: present
+      when: mysql_role == 'master'
+    
+    - name: Check slave status
+      mysql_replication:
+        mode: getslave
+        fail_on_error: false
+      register: slave
+      when: mysql_role == 'slave'
+    
+    - name: Stop slave replication
+      mysql_replication:
+        mode: stopslave
+
+    - name: Get the current master status
+      mysql_replication:
+        mode: getmaster
+      register: repl_stat
+      when: slave
+
+    - name: Get the current master servers replication status
+      mysql_replication:
+        mode: changemaster
+        master_host: "{{ db_master }}"
+        master_log_file: "{{ repl_stat.File }}"
+        master_log_pos: "{{ repl_stat.Position }}"
+        master_user: slave
+        master_password: "{{root_password}}"
+      register: slave
+      when: slave
+
+    - name: Run start replica and fail the task on errors
+      mysql_replication:
+        mode: startslave
+
+    - name: Copy dump file
+      copy:
+        src: ../assets/database/backup.sql
+        dest: /tmp
+      when: mysql_role == "master"
+
+    - name: Import the acme sql dump to master!
+      community.mysql.mysql_db:
+        name: wordpress
+        state: import
+        target: /tmp/backup.sql
+      when: mysql_role == "master"
+
+
+##todo update site URL
+
+
+ 

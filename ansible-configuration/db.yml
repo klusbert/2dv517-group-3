@@ -35,8 +35,9 @@
     - name: Create admin user
       mysql_user: 
         name: admin 
+        host: "%" 
         password: "{{root_password}}"
-        priv: '*.*:ALL'
+        priv: '*.*:ALL,GRANT'
         state: present
     
     - name: Create the slave user

@@ -80,6 +80,7 @@ binlog_do_db            = wordpress
 
 {% if mysql_role == "slave" %}
 relay-log               = /var/log/mysql/mysql-relay-bin.log
-read_only=ON
+#read_only=ON
+super_read_only=1
 {% endif %}
 

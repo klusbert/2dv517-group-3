@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+    ServerName www.tecmint.info
+    ServerAlias tecmint.info
+    DocumentRoot /var/www/tecmint.info/html
+
+    <Directory /var/www/tecmint.info/html>
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+    </Directory>
+
+    ErrorLog /var/log/httpd/tecmint.info-error.log
+    CustomLog /var/log/httpd/tecmint.info-access.log combined
+</VirtualHost>

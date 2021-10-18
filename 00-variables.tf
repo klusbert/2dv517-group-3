@@ -1,3 +1,8 @@
+variable "image" {
+    type = string
+    default = "Ubuntu 20.04"
+}
+
 variable "external_network_id" {
   type    = string
   default = "fd401e50-9484-4883-9672-a2814089528c"
@@ -12,8 +17,8 @@ variable "key_pair"{
 }
 variable "image_id" {
   type = string
-  default = "4063fb3e-0747-4345-bac8-5a8a9c3aa74e"
-  ##default = "ca4bec1a-ac25-434f-b14c-ad8078ccf39f"
+  ##default = "4063fb3e-0747-4345-bac8-5a8a9c3aa74e"
+  default = "ca4bec1a-ac25-434f-b14c-ad8078ccf39f"
 }
 variable "flavor_id" {
   type    = string

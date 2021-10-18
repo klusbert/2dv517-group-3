@@ -35,8 +35,9 @@
     - name: Create admin user
       mysql_user: 
         name: admin 
+        host: "%" 
         password: "{{root_password}}"
-        priv: '*.*:ALL'
+        priv: '*.*:ALL,GRANT'
         state: present
     
     - name: Create the slave user
@@ -93,8 +94,11 @@
         target: /tmp/backup.sql
       when: mysql_role == "master"
 
-
-##todo update site URL
-
-
- 
+    - name: Update site_url and home to loadbalancer floating IP
+      mysql_query:
+        login_db: wordpress
+        query:
+          - UPDATE `wp_options` SET `option_value` = '{{load_balancer_floating}}' WHERE `wp_options`.`option_id` = 1; 
+          - UPDATE `wp_options` SET `option_value` = '{{load_balancer_floating}}' WHERE `wp_options`.`option_id` = 2; 
+        single_transaction: yes
+      when: mysql_role == "master"

@@ -20,7 +20,7 @@
         dest: /etc/hosts 
 ## install nfs-common on all servers
 ##mount 192.168.199.14:/mnt/nfs_share /home/ubuntu/test/
-- import_playbook: "fileserver.yml"
-- import_playbook: "mountnfs.yml"
-- import_playbook: "fileserver.yml"
-- import_playbook: "master.yml"
+# - import_playbook: "fileserver.yml"
+# - import_playbook: "mountnfs.yml"
+# - import_playbook: "db.yml"
+# - import_playbook: "loadbalancer.yml"

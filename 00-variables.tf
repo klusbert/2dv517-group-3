@@ -8,7 +8,7 @@ variable "availability_zone" {
 }
 variable "key_pair" {
   type    = string
-  default = "mykey"
+  default = "oh222gw_Keypair"
 }
 variable "image_id" {
   type = string

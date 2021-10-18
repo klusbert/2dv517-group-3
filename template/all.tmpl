@@ -16,3 +16,6 @@ ${load_balancer.name}: ${load_balancer.access_ip_v4}
 %{ for index, server in word_press ~}
 ${server.name}: ${server.access_ip_v4} 
 %{ endfor ~}
+
+db_username: wordpress
+database_name: wordpress

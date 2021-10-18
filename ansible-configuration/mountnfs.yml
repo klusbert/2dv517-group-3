@@ -13,4 +13,7 @@
           path: /home/ubuntu/nfs_fileserver
           fstype: nfs
           state: mounted
+    - name: move Wordpress files and data from company to nfs_filesrver
+      ansible.builtin.copy:
+        src: 
 

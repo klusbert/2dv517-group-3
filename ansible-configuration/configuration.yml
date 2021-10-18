@@ -24,3 +24,4 @@
 # - import_playbook: "mountnfs.yml"
 # - import_playbook: "db.yml"
 # - import_playbook: "loadbalancer.yml"
+- import_playbook: "wordpress.yml"

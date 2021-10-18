@@ -1,0 +1,9 @@
+---
+- hosts: word_press
+  become: true
+  vars_files:
+  - ./group_vars/wordpress_default_vars.yml
+  tasks:
+  - name: 
+  - name: install php and packages
+    package: name={{ php_modules }} update_cache=yes state=latest

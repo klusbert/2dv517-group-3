@@ -95,7 +95,7 @@
       when: mysql_role == "master"
 
     - name: Update site_url and home to loadbalancer floating IP
-      mysql_query:
+      community.mysql.mysql_query:
         login_db: wordpress
         query:
           - UPDATE `wp_options` SET `option_value` = '{{load_balancer_floating}}' WHERE `wp_options`.`option_id` = 1; 

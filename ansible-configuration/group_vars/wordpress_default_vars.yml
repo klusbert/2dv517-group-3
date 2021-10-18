@@ -1,13 +1,3 @@
 #PHP Settings
 php_modules: [ 'php', 'php-curl', 'php-gd', 'php-mbstring', 'php-xml', 'php-xmlrpc', 'php-soap', 'php-intl', 'php-zip' ]
  
-#MySQL Settings
-mysql_root_password: "your-root-password"
-mysql_db: "wpdb"
-mysql_user: "group3"
-mysql_password: "123456789"
- 
-#HTTP Settings
-http_host: "wp.example.com"
-http_conf: "wp.example.com.conf"
-http_port: "80"

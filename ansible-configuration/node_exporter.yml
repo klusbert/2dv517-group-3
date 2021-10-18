@@ -33,10 +33,10 @@
         enabled: yes
         state: started
         name: node_exporter.service
-    - name: add promethius configuration
+    - name: add prometheus configuration
       template:
-        src: exports/promethius.yml.j2
-        dest: /etc/promethius.yml
+        src: exports/prometheus.yml.j2
+        dest: /etc/prometheus.yml
         owner: root
         group: root
         mode: 0755

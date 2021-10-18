@@ -4,6 +4,15 @@
   vars_files:
   - ./group_vars/wordpress_default_vars.yml
   tasks:
-  - name: 
   - name: install php and packages
     package: name={{ php_modules }} update_cache=yes state=latest
+  - name: install wordpress
+    get_url:
+      url: https://github.com/2dv514/syllabus/blob/master/examination/part_2/acme_wordpress_files_and_data.tar.gz?raw=true
+      dest: /home/ubuntu/
+  - name: Unzip acme wordpress files
+    unarchive:
+      src: /home/ubuntu/acme_wordpress_files_and_data.tar.gz
+      dest: /home/ubuntu/nfs_fileserver/www
+      remote_src: yes
+      mode: '0755'

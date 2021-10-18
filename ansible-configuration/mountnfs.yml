@@ -7,13 +7,16 @@
         path: /home/ubuntu/nfs_fileserver
         state  : directory
         mode: '0755'
+    - name: "Create www directory for wordpress files"
+      ansible.builtin.file:
+        path: /home/ubuntu/nfs_fileserver/www
+        state  : directory
+        mode: '0755'
     - name: "Mount nfs server"
       mount: 
           src: "fileserver:{{mount_path}}" 
           path: /home/ubuntu/nfs_fileserver
           fstype: nfs
           state: mounted
-    - name: move Wordpress files and data from company to nfs_filesrver
-      ansible.builtin.copy:
-        src: 
+
 

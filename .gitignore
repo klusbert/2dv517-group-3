@@ -1,5 +1,7 @@
 **/secrets/*.sh
+**/secrets/*.yml
 *.pem
+
 # Local .terraform directories
 **/.terraform/*
 

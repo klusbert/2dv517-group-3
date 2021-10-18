@@ -1,5 +1,5 @@
 ---
-- hosts: all,!fileserver # do not mount on the fileserver.
+- hosts: word_press # only mount of wordpress servers
   become: true 
   tasks: 
     - name: "Create directory"
@@ -13,3 +13,4 @@
           path: /home/ubuntu/nfs_fileserver
           fstype: nfs
           state: mounted
+

@@ -2,6 +2,7 @@ username: ubuntu
 mount_path: /mnt/nfs_share
 
 #Floating ips
+
 load_balancer_floating: 194.47.176.241
 monitoring_floating: 194.47.177.19
 
@@ -20,3 +21,4 @@ word_press-04: 192.168.199.10
 
 db_username: wordpress
 database_name: wordpress
+

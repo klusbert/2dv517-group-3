@@ -1,13 +1,26 @@
 ---
 - hosts: all
   become: true
-  tasks:   
+  tasks:
+    - name: Update cache
+      apt:
+       update_cache: yes
+
+    - name: Upgrade all packages on servers
+      apt:
+        name: "*"
+        state: latest
+
+    - name: Install nfs client on all instances.
+      action: apt pkg=nfs-common state=present
+
     - name: Copy host file to /etc/hosts
       copy:
         src: ./exports/hosts
-        dest: /etc/hosts 
+        dest: /etc/hosts
 - import_playbook: "fileserver.yml"
 - import_playbook: "mountnfs.yml"
 - import_playbook: "db.yml"
 - import_playbook: "loadbalancer.yml"
-
+- import_playbook: "node_exporter.yml"
+- import_playbook: "prometheus.yml"

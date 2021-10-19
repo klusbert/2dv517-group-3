@@ -1,13 +1,15 @@
 <VirtualHost *:80>
-    ServerName www.tecmint.info
-    ServerAlias tecmint.info
-    DocumentRoot /var/www/tecmint.info/html
+    ServerAdmin {{apache_server_admin}}
+    ServerName {{apache_server_name}}
+    ServerAlias {{apache_server_alias}}
+    DocumentRoot /home/ubuntu/nfs_fileserver/www
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-    <Directory /var/www/tecmint.info/html>
-        Options -Indexes +FollowSymLinks
+    <Directory /home/ubuntu/nfs_fileserver/www>
         AllowOverride All
+        Options Indexes FollowSymLinks
+        Require all granted
+        Options -Indexes
     </Directory>
-
-    ErrorLog /var/log/httpd/tecmint.info-error.log
-    CustomLog /var/log/httpd/tecmint.info-access.log combined
 </VirtualHost>

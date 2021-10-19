@@ -5,7 +5,6 @@ mount_path: /mnt/nfs_share
 load_balancer_floating: 194.47.177.48
 monitoring_floating: 194.47.176.218
 
-db_username: admin
 
 #private ips
 db_master: 192.168.199.13
@@ -17,3 +16,9 @@ load_balancer: 192.168.199.11
 word_press-01: 192.168.199.14 
 word_press-02: 192.168.199.5 
 word_press-03: 192.168.199.7 
+
+db_username: admin
+
+apache_server_admin: admin@acme.example.com
+apache_server_name: acme.example.com
+apache_server_alias: www.acme.example.com

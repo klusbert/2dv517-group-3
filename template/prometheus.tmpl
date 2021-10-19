@@ -1,0 +1,5 @@
+scrape_configs:
+
+%{ for index, server in word_press ~}
+        server ${server.access_ip_v4};
+%{ endfor ~}

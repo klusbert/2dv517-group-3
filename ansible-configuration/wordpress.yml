@@ -40,7 +40,7 @@
       path: "/var/www/html"
       state: directory
       owner: "{{username}}"
-      group: "+{{username}}"
+      group: "{{username}}"
       mode: '0755'
   
   - name: Set up virtual host

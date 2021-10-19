@@ -2,18 +2,18 @@
 - hosts: all
   become: true
   tasks:
-    - name: Update cache 
+    - name: Update cache
       apt:
        update_cache: yes
-         
+
     - name: Upgrade all packages on servers
-      apt: 
+      apt:
         name: "*"
         state: latest
 
     - name: Install nfs client on all instances.
       action: apt pkg=nfs-common state=present
-      
+
     - name: Copy host file to /etc/hosts
       copy:
         src: ./exports/hosts

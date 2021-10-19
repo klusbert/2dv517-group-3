@@ -1,0 +1,22 @@
+---
+- hosts: monitoring
+
+- tasks:
+  - name: Downloading prometheus
+    get_url:
+      url: https://github.com/prometheus/prometheus/releases/download/v2.30.3/prometheus-2.30.3.linux-amd64.tar.gz
+      dest: /tmp
+  - name: Unpacking prometheus
+    unarchive:
+      remote_src: yes
+      src: /tmp/prometheus-2.30.3.linux-amd64.tar.gz
+      dest: /tmp
+  - name: add prometheus configuration
+    template:
+      src: exports/prometheus.yml.j2
+      dest: /tmp/prometheus.yml
+      owner: root
+      group: root
+      mode: 0755
+  - name: start prometheus
+    ansible.builtin.shell: /tmp/prometheus/prometheus --config.file=/tmp/prometheus.yml

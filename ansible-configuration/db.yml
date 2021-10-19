@@ -31,12 +31,12 @@
         name=test 
         state=absent
     
-    - name: Create admin user
+    - name: Create wordpress user, give select,insert and delete to wo
       community.mysql.mysql_user: 
         name: "{{db_username}}"
         host: "%" 
         password: "{{root_password}}"
-        priv: '*.*:SELECT,INSERT'
+        priv: '*.*:SELECT,INSERT,DELETE'
         state: present
     
     - name: Create the slave user

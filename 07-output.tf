@@ -73,3 +73,5 @@ resource "local_file" "password_output" {
   )
   filename = "./secrets/db_password.yml"
 }
+
+

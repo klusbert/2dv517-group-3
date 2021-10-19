@@ -8,7 +8,7 @@ resource "null_resource" "provisioner" {
 
   depends_on = [time_sleep.wait_30_seconds]
   triggers = {
-   # always_run = "${timestamp()}"
+    always_run = "${timestamp()}"
   }
   provisioner "local-exec" {
     command = "ansible-playbook -i './ansible-configuration/inventory.cfg' ./ansible-configuration/configuration.yml"

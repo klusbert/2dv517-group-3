@@ -1,7 +1,9 @@
 ---
 - hosts: word_press # only mount of wordpress servers
   become: true 
-  tasks: 
+  tasks:
+    - name: Install nfs client on all instances.
+        action: apt pkg=nfs-common state=present
     - name: "Create directory"
       ansible.builtin.file:
         path: /home/ubuntu/nfs_fileserver

@@ -1,26 +1,14 @@
 127.0.0.1 localhost
 
-<<<<<<< HEAD
-192.168.199.13 db_master
-192.168.199.8 db_slave
-192.168.199.21 monitoring
-192.168.199.15 fileserver
+192.168.199.17 db_master
+192.168.199.10 db_slave
+192.168.199.14 monitoring
+192.168.199.20 fileserver
 192.168.199.11 load_balancer
 
-192.168.199.14 word_press-01 
-192.168.199.5 word_press-02 
-192.168.199.7 word_press-03 
-=======
-192.168.199.15 db_master
-192.168.199.13 db_slave
-192.168.199.20 monitoring
-192.168.199.11 fileserver
-192.168.199.7 load_balancer
-
-192.168.199.14 word_press-01 
-192.168.199.10 word_press-02 
-192.168.199.6 word_press-03 
->>>>>>> 09d8eb898b5bdea6b4c5742ec921aae9182f94b9
+192.168.199.13 word_press-01 
+192.168.199.6 word_press-02 
+192.168.199.5 word_press-03 
 
 # The following lines are desirable for IPv6 capable hosts
 ::1 ip6-localhost ip6-loopback

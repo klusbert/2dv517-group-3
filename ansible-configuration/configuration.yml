@@ -3,29 +3,23 @@
   become: true
   tasks:
     - name: Update cache
-      apt:
-       update_cache: yes
+        apt:
+          update_cache: yes
 
     - name: Upgrade all packages on servers
       apt:
         name: "*"
         state: latest
 
-    - name: Install nfs client on all instances.
-      action: apt pkg=nfs-common state=present
-
     - name: Copy host file to /etc/hosts
       copy:
         src: ./exports/hosts
-        dest: /etc/hosts 
-## install nfs-common on all servers
-##mount 192.168.199.14:/mnt/nfs_share /home/ubuntu/test/
+        dest: /etc/hosts
+
 - import_playbook: "fileserver.yml"
 - import_playbook: "mountnfs.yml"
 - import_playbook: "db.yml"
 - import_playbook: "loadbalancer.yml"
 - import_playbook: "wordpress.yml"
-- import_playbook: "db.yml"
-- import_playbook: "loadbalancer.yml"
 # - import_playbook: "node_exporter.yml"
 

@@ -3,8 +3,8 @@
   become: true
   tasks:
     - name: Update cache
-        apt:
-          update_cache: yes
+      apt:
+        update_cache: yes
 
     - name: Upgrade all packages on servers
       apt:
@@ -13,7 +13,7 @@
 
     - name: Copy host file to /etc/hosts
       copy:
-        src: ./exports/hosts
+        src: ./exports/hosts.j2
         dest: /etc/hosts
 
 - import_playbook: "fileserver.yml"

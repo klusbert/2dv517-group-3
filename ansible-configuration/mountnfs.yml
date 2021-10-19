@@ -3,17 +3,7 @@
   become: true 
   tasks:
     - name: Install nfs client on all instances.
-        action: apt pkg=nfs-common state=present
-    - name: "Create directory"
-      ansible.builtin.file:
-        path: /home/ubuntu/nfs_fileserver
-        state  : directory
-        mode: '0755'
-    - name: "Create www directory for wordpress files"
-      ansible.builtin.file:
-        path: /home/ubuntu/nfs_fileserver/www
-        state  : directory
-        mode: '0755'
+      action: apt pkg=nfs-common state=present
     - name: "Mount nfs server"
       mount: 
           src: "fileserver:{{mount_path}}" 

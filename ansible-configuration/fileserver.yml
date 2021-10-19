@@ -26,3 +26,4 @@
       template: src=./exports/nfs_exports.j2 dest=/etc/exports owner=root group=root
     - name: restart nfs server
       service: name=nfs-kernel-server state=restarted
+

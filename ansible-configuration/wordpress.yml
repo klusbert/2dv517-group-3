@@ -5,6 +5,11 @@
   - ./group_vars/wordpress_default_vars.yml
   - ../secrets/db_password.yml
   tasks:
+  - name: Creates www  directory for html files.
+    file:
+      path: "{{ www_folder }}"
+      state: directory
+
   - name: install php and packages
     package: name={{ php_modules }} update_cache=yes state=latest
 

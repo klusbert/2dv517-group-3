@@ -1,3 +1,4 @@
 #PHP Settings
 php_modules: [ 'php', 'php-curl', 'php-mysql', 'php-gd', 'php-mbstring', 'php-xml', 'php-xmlrpc', 'php-soap', 'php-intl', 'php-zip' ]
+www_folder: /home/ubuntu/nfs_fileserver/www
  

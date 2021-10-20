@@ -1,0 +1,37 @@
+---
+  - hosts: word_press
+    become: True
+    become_user: root
+    tasks:
+      - name: Install  golang
+        apt:
+          name: golang
+          state: present
+      - name: Make directory go
+        file:
+          path: ~/go
+          state: directory
+      - name: Export GOPATH
+        shell: GOPATH=$HOME/go
+      - name: Export PATH
+        shell: PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+      #- name: Reload config
+      #  shell: source ~/.bashrc
+      - name: Install
+        shell: go get github.com/Lusitaniae/apache_exporter
+      - name: Create soft link
+        shell: ln -s ~/go/bin/apache_exporter /usr/bin
+      - name: Create upstart config
+        template:
+          src: exports/apache_exporter.conf.j2
+          dest: /etc/init/apache_exporter.conf
+          owner: root
+          group: root
+          mode: 0600
+      - name: Start apache service
+        systemd:
+          daemon_reload: yes
+          enabled: yes
+          state: started
+          name: apache_exporter.service
+

@@ -4,6 +4,7 @@ resource "openstack_compute_instance_v2" "word_press" {
   key_pair          = var.key_pair
   count             = var.wordpress_instances
   name              = format("%s-%02d", "word_press", count.index + 1)
+  force_delete = true
   security_groups   = ["default"]
   availability_zone = var.availability_zone
   depends_on = [
@@ -20,9 +21,10 @@ resource "openstack_compute_instance_v2" "db_master" {
   flavor_id         = var.flavor_id
   key_pair          = var.key_pair
   availability_zone = var.availability_zone
+  force_delete = true
   security_groups   = ["default"]
   depends_on = [
-    openstack_compute_instance_v2.word_press
+    openstack_networking_router_interface_v2.router_interface_1
   ]
   network {
     name = openstack_networking_network_v2.network_1.name
@@ -35,9 +37,10 @@ resource "openstack_compute_instance_v2" "db_slave" {
   flavor_id         = var.flavor_id
   key_pair          = var.key_pair
   availability_zone = var.availability_zone
+  force_delete = true
   security_groups   = ["default"]
   depends_on = [
-    openstack_compute_instance_v2.word_press
+    openstack_networking_router_interface_v2.router_interface_1
   ]
   network {
     name = openstack_networking_network_v2.network_1.name
@@ -50,10 +53,11 @@ resource "openstack_compute_instance_v2" "load_balancer" {
   image_id          = var.image_id
   flavor_id         = var.flavor_id
   key_pair          = var.key_pair
-  security_groups   = ["default", "${openstack_compute_secgroup_v2.http.name}","${openstack_compute_secgroup_v2.ssh.name}","${openstack_compute_secgroup_v2.icmp.name}"]
+  security_groups   = ["default", openstack_compute_secgroup_v2.http.name,openstack_compute_secgroup_v2.ssh.name,openstack_compute_secgroup_v2.icmp.name]
   availability_zone = var.availability_zone
+  force_delete = true
   depends_on = [
-    openstack_compute_instance_v2.word_press
+    openstack_networking_router_interface_v2.router_interface_1
   ]
   network {
     name = openstack_networking_network_v2.network_1.name
@@ -65,12 +69,11 @@ resource "openstack_compute_instance_v2" "monitoring" {
   image_id          = var.image_id
   flavor_id         = var.flavor_id
   key_pair          = var.key_pair
-  security_groups   = ["default", "${openstack_compute_secgroup_v2.http.name}","${openstack_compute_secgroup_v2.ssh.name}","${openstack_compute_secgroup_v2.icmp.name}"]
+  security_groups   = ["default", openstack_compute_secgroup_v2.http.name,openstack_compute_secgroup_v2.ssh.name,openstack_compute_secgroup_v2.icmp.name]
   availability_zone = var.availability_zone
+  force_delete = true
   depends_on = [
-    openstack_compute_instance_v2.load_balancer,
-    openstack_compute_instance_v2.db_slave,
-    openstack_compute_instance_v2.db_master
+    openstack_networking_router_interface_v2.router_interface_1
   ]
   network {
     name = openstack_networking_network_v2.network_1.name
@@ -85,10 +88,9 @@ resource "openstack_compute_instance_v2" "fileserver" {
   key_pair          = var.key_pair
   security_groups   = ["default"]
   availability_zone = var.availability_zone
+  force_delete = true
   depends_on = [
-    openstack_compute_instance_v2.load_balancer,
-    openstack_compute_instance_v2.db_slave,
-    openstack_compute_instance_v2.db_master
+    openstack_networking_router_interface_v2.router_interface_1
   ]
   network {
     name = openstack_networking_network_v2.network_1.name

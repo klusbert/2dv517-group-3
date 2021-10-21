@@ -19,11 +19,10 @@
         path: "{{mount_path}}"
         owner: "{{ username }}"
         group: "{{ username }}"
-        mode: 0700
+        mode: 0755 # Change to 0700 later
     - name: install nfs server
       action: apt pkg=nfs-kernel-server state=present
     - name: Add Servers to /etc/exports
       template: src=./exports/nfs_exports.j2 dest=/etc/exports owner=root group=root
     - name: restart nfs server
       service: name=nfs-kernel-server state=restarted
-

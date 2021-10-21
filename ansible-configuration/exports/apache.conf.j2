@@ -1,14 +1,15 @@
 <VirtualHost *:80>
     ServerAdmin {{apache_server_admin}}
-    ServerName {{apache_server_name}}
-    ServerAlias {{apache_server_alias}}
-    DocumentRoot /home/ubuntu/nfs_fileserver/www
+    ServerName localhost
+    ServerAlias www.localhost
+    DocumentRoot /home/ubuntu/nfs_fileserver/www/
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-    <Directory /home/ubuntu/nfs_fileserver/www>
+    <Directory /home/ubuntu/nfs_fileserver/www/>
         AllowOverride All
         Options Indexes FollowSymLinks
         Require all granted
     </Directory>
+
 </VirtualHost>

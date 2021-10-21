@@ -50,24 +50,24 @@
 
     - name: Check slave status
       community.mysql.mysql_replication:
-        mode: getslave
+        mode: getreplica
         fail_on_error: false
       register: slave
       when: mysql_role == 'slave'
 
     - name: Stop slave replication
       community.mysql.mysql_replication:
-        mode: stopslave
+        mode: stopreplica
 
     - name: Get the current master status
       community.mysql.mysql_replication:
-        mode: getmaster
+        mode: getprimary
       register: repl_stat
       when: slave
 
     - name: Get the current master servers replication status
       community.mysql.mysql_replication:
-        mode: changemaster
+        mode: changeprimary
         master_host: "{{ db_master }}"
         master_log_file: "{{ repl_stat.File }}"
         master_log_pos: "{{ repl_stat.Position }}"
@@ -78,7 +78,7 @@
 
     - name: Run start replica and fail the task on errors
       community.mysql.mysql_replication:
-        mode: startslave
+        mode: startreplica
 
     - name: Copy dump file
       copy:
@@ -97,8 +97,9 @@
       community.mysql.mysql_query:
         login_db: "{{database_name}}"
         query:
-          - UPDATE `wp_options` SET `option_value` = '{{load_balancer_floating}}' WHERE `wp_options`.`option_id` = 1;
-          - UPDATE `wp_options` SET `option_value` = '{{load_balancer_floating}}' WHERE `wp_options`.`option_id` = 2;
+          - UPDATE `wp_options` SET `option_value` = 'http://{{load_balancer_floating}}' WHERE `wp_options`.`option_id` = 1;
+          - UPDATE `wp_options` SET `option_value` = 'http://{{load_balancer_floating}}' WHERE `wp_options`.`option_id` = 2;
+          # - UPDATE `wp_users` SET `user_pass` = 'a101621a9c430567e3fe1ea5f3cf8dd3' WHERE `wp_users`.`ID` = 1;
         single_transaction: yes
       when: mysql_role == "master"
 

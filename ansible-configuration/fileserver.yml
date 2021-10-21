@@ -3,7 +3,7 @@
 ---
 - hosts: fileserver
   become: true
-  tasks:     
+  tasks:
     - name: Create a file system on deviece id(usally sdb)
       community.general.filesystem:
         fstype: ext4
@@ -26,3 +26,4 @@
       template: src=./exports/nfs_exports.j2 dest=/etc/exports owner=root group=root
     - name: restart nfs server
       service: name=nfs-kernel-server state=restarted
+

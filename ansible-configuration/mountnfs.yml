@@ -1,15 +1,14 @@
 ---
-- hosts: all,!fileserver # do not mount on the fileserver.
+- hosts: word_press # only mount of wordpress servers
   become: true 
-  tasks: 
-    - name: "Create directory"
-      ansible.builtin.file:
-        path: /home/ubuntu/nfs_fileserver
-        state  : directory
-        mode: '0755'
+  tasks:
+    - name: Install nfs client on all instances.
+      action: apt pkg=nfs-common state=present
     - name: "Mount nfs server"
       mount: 
           src: "fileserver:{{mount_path}}" 
           path: /home/ubuntu/nfs_fileserver
           fstype: nfs
           state: mounted
+
+

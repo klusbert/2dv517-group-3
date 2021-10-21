@@ -17,10 +17,10 @@ resource "null_resource" "protect_ssh_key" {
      command = "chmod 400 ./secrets/private_key.pem"
   }
 }
-resource "null_resource" "addkey" {
-  depends_on = [null_resource.protect_ssh_key]
 
-  provisioner "local-exec" {
+resource "null_resource" "add_key"{
+   depends_on = [null_resource.protect_ssh_key]
+     provisioner "local-exec" {
      command = "ssh-add ./secrets/private_key.pem"
   }
 }

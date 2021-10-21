@@ -1,7 +1,6 @@
-#ignore sh files in secrets secrets
 **/secrets/*.sh
+**/secrets/*.yml
 *.pem
-
 
 # Local .terraform directories
 **/.terraform/*
@@ -38,3 +37,6 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+#Ignore personal openrc.sh
+*openrc.sh

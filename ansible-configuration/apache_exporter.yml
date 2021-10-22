@@ -12,13 +12,13 @@
           path: ~/go
           state: directory
       - name: Export GOPATH
-        shell: GOPATH=$HOME/go
+        shell: GOPATH=~/go
       - name: Export PATH
-        shell: PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+        shell: PATH=ubuntu:{{word_press}}/bin:~/go/bin
       #- name: Reload config
       #  shell: source ~/.bashrc
       - name: Install
-        shell: go get github.com/Lusitaniae/apache_exporter
+        shell: go get https://github.com/Lusitaniae/apache_exporter.git
       - name: Create soft link
         shell: ln -s ~/go/bin/apache_exporter /usr/bin
       - name: Create upstart config

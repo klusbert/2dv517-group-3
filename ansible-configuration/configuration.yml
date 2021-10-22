@@ -22,5 +22,8 @@
 - import_playbook: "loadbalancer.yml"
 - import_playbook: "wordpress.yml"
 - import_playbook: "node_exporter.yml"
+<<<<<<< HEAD
 - import_playbook: "mysql_exporter.yml"
+=======
+>>>>>>> origin/master
 

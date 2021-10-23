@@ -13,12 +13,12 @@ variable "availability_zone" {
 }
 variable "key_pair"{
     type = string
-    default = "rb222rx_Keypair"
+    default = "mykey"
 }
 variable "image_id" {
   type = string
-  #default = "4063fb3e-0747-4345-bac8-5a8a9c3aa74e"
-  default = "ca4bec1a-ac25-434f-b14c-ad8078ccf39f"
+  default = "4063fb3e-0747-4345-bac8-5a8a9c3aa74e"
+  #default = "ca4bec1a-ac25-434f-b14c-ad8078ccf39f"
 }
 variable "flavor_id" {
   type    = string

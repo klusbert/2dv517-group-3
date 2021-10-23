@@ -36,7 +36,7 @@
         name: "{{db_username}}"
         host: "%"
         password: "{{root_password}}"
-        priv: '*.*:SELECT,INSERT,DELETE'
+        priv: '*.*:SELECT,INSERT,DELETE,FILE'
         state: present
 
     - name: Create the slave user

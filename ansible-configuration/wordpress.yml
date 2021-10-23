@@ -5,35 +5,22 @@
   - ./group_vars/wordpress_default_vars.yml
   - ../secrets/db_password.yml
   tasks:
-  - name: Creates www  directory for html files.
-    file:
-      path: "{{ www_folder }}"
-      state: directory
-
   - name: install php and packages
     package: name={{ php_modules }} update_cache=yes state=latest
 
   - name: install Apache
     apt: name=apache2 update_cache=yes state=latest
 
-  - name: install acme wordpress and unarchive it
-    unarchive:
-      src: https://github.com/2dv514/syllabus/blob/master/examination/part_2/acme_wordpress_files_and_data.tar.gz?raw=true
-      dest: /home/ubuntu/nfs_fileserver/www
-      remote_src: yes
 
-  - name: Unzip wordpress files
-    unarchive:
-      src: /home/ubuntu/nfs_fileserver/www/acme_wordpress_files.tar.gz
-      dest: /home/ubuntu/nfs_fileserver/www
-      creates: /home/ubuntu/nfs_fileserver/www/wp-config.php
-      remote_src: yes
-      mode: '0755'
-  
   - name: Replace existing wp-config.php
     template:
       src: "exports/wp-config.php.j2"
-      dest: "/home/ubuntu/nfs_fileserver/www/wp-config.php"
+      dest: "{{ www_folder }}/wp-config.php"
+
+  - name: add .htaccess file
+    template:
+      src: "exports/.htaccess.j2"
+      dest: "{{ www_folder }}/.htaccess"
 
   - name: Create document root
     file:

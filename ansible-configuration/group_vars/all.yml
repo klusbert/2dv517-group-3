@@ -5,20 +5,20 @@ mount_path: /mnt/nfs_share
 www_folder: /home/ubuntu/nfs_fileserver/www
 
 #Floating ips
-load_balancer_floating: 194.47.177.57
-monitoring_floating: 194.47.177.46
+load_balancer_floating: 194.47.177.71
+monitoring_floating: 194.47.176.27
 
 
 #private ips
-db_master: 192.168.199.20
-db_slave: 192.168.199.7
-monitoring: 192.168.199.8 
-fileserver: 192.168.199.10 
-load_balancer: 192.168.199.9
+db_master: 192.168.199.12
+db_slave: 192.168.199.6
+monitoring: 192.168.199.13 
+fileserver: 192.168.199.16 
+load_balancer: 192.168.199.7
 
-word_press-01: 192.168.199.18 
-word_press-02: 192.168.199.11 
-word_press-03: 192.168.199.17 
+word_press-01: 192.168.199.5 
+word_press-02: 192.168.199.17 
+word_press-03: 192.168.199.14 
 
 db_username: wordpress
 database_name: wordpress

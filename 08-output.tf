@@ -75,8 +75,3 @@ resource "local_file" "password_output" {
   filename = "./secrets/db_password.yml"
 }
 
-
-resource "local_file" "outputdata" {
-  filename = "${path.module}/mydata.json"
-  content  = "root_password:" + random_password.db_password.result
-}

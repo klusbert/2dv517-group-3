@@ -97,8 +97,9 @@
       community.mysql.mysql_query:
         login_db: "{{database_name}}"
         query:
-          - UPDATE `wp_options` SET `option_value` = '{{load_balancer_floating}}' WHERE `wp_options`.`option_id` = 1;
-          - UPDATE `wp_options` SET `option_value` = '{{load_balancer_floating}}' WHERE `wp_options`.`option_id` = 2;
+          - UPDATE `wp_options` SET `option_value` = 'http://{{load_balancer_floating}}' WHERE `wp_options`.`option_id` = 1;
+          - UPDATE `wp_options` SET `option_value` = 'http://{{load_balancer_floating}}' WHERE `wp_options`.`option_id` = 2;
+          # - UPDATE `wp_users` SET `user_pass` = 'a101621a9c430567e3fe1ea5f3cf8dd3' WHERE `wp_users`.`ID` = 1;
         single_transaction: yes
       when: mysql_role == "master"
 

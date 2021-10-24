@@ -5,25 +5,25 @@ mount_path: /mnt/nfs_share
 www_folder: /home/ubuntu/nfs_fileserver/www
 
 #Floating ips
-load_balancer_floating: 194.47.177.71
+load_balancer_floating: 194.47.176.226
 monitoring_floating: 194.47.176.27
 
 
 #private ips
-db_master: 192.168.199.12
-db_slave: 192.168.199.6
-monitoring: 192.168.199.13 
-fileserver: 192.168.199.16 
+db_master: 192.168.199.13
+db_slave: 192.168.199.14
+monitoring: 192.168.199.19 
+fileserver: 192.168.199.12 
 load_balancer: 192.168.199.7
 
-word_press-01: 192.168.199.5 
-word_press-02: 192.168.199.17 
-word_press-03: 192.168.199.14 
+word_press-01: 192.168.199.11 
+word_press-02: 192.168.199.5 
+word_press-03: 192.168.199.8 
 
 db_username: wordpress
 database_name: wordpress
 
-
-apache_server_admin: admin@acme.example.com
+#Apache credentials
+apache_server_admin: admin@amce.example.com
 apache_server_name: acme.example.com
 apache_server_alias: www.acme.example.com

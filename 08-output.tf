@@ -57,13 +57,13 @@ resource "local_file" "AnsibleVariables" {
 
 resource "local_file" "nginx_loadbalancer" {
   content = templatefile("./template/load_balancer.tmpl",
-  {
+    {
 
-    word_press = openstack_compute_instance_v2.word_press.*,
-    db_master = openstack_compute_instance_v2.db_master.access_ip_v4,
-    db_slave = openstack_compute_instance_v2.db_slave.access_ip_v4
+      word_press = openstack_compute_instance_v2.word_press.*,
+      db_master  = openstack_compute_instance_v2.db_master.access_ip_v4,
+      db_slave   = openstack_compute_instance_v2.db_slave.access_ip_v4
 
-  }
+    }
   )
   filename = "./ansible-configuration/exports/nginx.conf.j2"
 }
@@ -74,3 +74,4 @@ resource "local_file" "password_output" {
   )
   filename = "./secrets/db_password.yml"
 }
+

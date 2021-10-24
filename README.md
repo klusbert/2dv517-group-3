@@ -7,14 +7,9 @@
 2. Connect to LNU vpn
 3. Clone this repo
 4. Run terraform init in this directory
-5. Run source <path/to/rc/file>
-6. Add your private ssh key file into ssh agent ssh-add <path/to/your/pem/file>
-7. Run terraform plan
-8. Run terraform apply -parallelism 1 (you can try increase it more than 1 but beware that running to many parallels could cause problems I ran 3 last time and it worked)
+5. Run terraform plan
+6. Run terraform apply 
 
-
-Install ansible community.general package "ansible-galaxy collection install community.general"
-Install ansible community.sql package "ansible-galaxy collection install community.mysql"
 
 
 # Usefully commands
@@ -23,3 +18,15 @@ Install ansible community.sql package "ansible-galaxy collection install communi
 | ssh into a client with no floating ip | ssh -J ubuntu@floating-ip ubuntu@private-ip |
 |                                       |                                             |
 |                                       |                                             |
+
+## Tools and versions
+
+### Ansible - Version 2.11
+**Packages**
+| Package name    | Install Command                                   |
+|-----------------|---------------------------------------------------|
+| Community.Mysql | ansible-galaxy collection install community.mysql |
+|                 |                                                   |
+|                 |                                                   |
+### Terraform - Version 1.0.8
+

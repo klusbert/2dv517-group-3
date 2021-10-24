@@ -5,7 +5,6 @@
   - ./group_vars/wordpress_default_vars.yml
   - ../secrets/db_password.yml
   tasks:
-
   - name: install php and packages
     package: name={{ php_modules }} update_cache=yes state=latest
 

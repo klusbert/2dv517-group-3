@@ -2,6 +2,7 @@ resource "local_file" "AnsibleInventory" {
   content = templatefile("./template/inventory.tmpl",
     {
       db_master     = openstack_compute_instance_v2.db_master.access_ip_v4,
+      db_proxy      = openstack_compute_instance_v2.db_proxy.access_ip_v4,
       db_slave      = openstack_compute_instance_v2.db_slave.access_ip_v4,
       monitoring    = openstack_compute_instance_v2.monitoring.access_ip_v4,
       fileserver    = openstack_compute_instance_v2.fileserver.access_ip_v4,
@@ -18,6 +19,7 @@ resource "local_file" "HostFile" {
   content = templatefile("./template/hosts.tmpl",
     {
       db_master     = openstack_compute_instance_v2.db_master,
+      db_proxy      = openstack_compute_instance_v2.db_proxy,
       db_slave      = openstack_compute_instance_v2.db_slave,
       monitoring    = openstack_compute_instance_v2.monitoring,
       fileserver    = openstack_compute_instance_v2.fileserver,
@@ -43,6 +45,7 @@ resource "local_file" "AnsibleVariables" {
       load_balancer_floating_ip = openstack_networking_floatingip_v2.fip_1.address,
       monitoring_floating_ip    = openstack_networking_floatingip_v2.fip_2.address,
       db_master                 = openstack_compute_instance_v2.db_master,
+      db_proxy                  = openstack_compute_instance_v2.db_proxy,
       db_slave                  = openstack_compute_instance_v2.db_slave,
       fileserver                = openstack_compute_instance_v2.fileserver,
       monitoring                = openstack_compute_instance_v2.monitoring,
@@ -60,12 +63,21 @@ resource "local_file" "nginx_loadbalancer" {
     {
 
       word_press = openstack_compute_instance_v2.word_press.*,
-      db_master  = openstack_compute_instance_v2.db_master.access_ip_v4,
-      db_slave   = openstack_compute_instance_v2.db_slave.access_ip_v4
+
 
     }
   )
   filename = "./ansible-configuration/exports/nginx.conf.j2"
+}
+
+resource "local_file" "db_loadbalancer" {
+  content = templatefile("./template/db_loadbalancer.tmpl",
+    {
+      db_master = openstack_compute_instance_v2.db_master.access_ip_v4,
+      db_slave  = openstack_compute_instance_v2.db_slave.access_ip_v4
+    }
+  )
+  filename = "./ansible-configuration/exports/db_loadbalancer.conf.j2"
 }
 
 resource "local_file" "password_output" {

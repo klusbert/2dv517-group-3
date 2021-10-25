@@ -1,5 +1,5 @@
 resource "openstack_compute_instance_v2" "word_press" {
-  image_id          = var.image_id
+  image_id          = var.wordpress_image_id
   flavor_id         = var.flavor_id
   key_pair          = openstack_compute_keypair_v2.project_keypair.name
   count             = var.wordpress_instances
@@ -83,6 +83,23 @@ resource "openstack_compute_instance_v2" "monitoring" {
 
 resource "openstack_compute_instance_v2" "fileserver" {
   name              = "fileserver"
+  image_id          = var.image_id
+  flavor_id         = var.flavor_id
+  key_pair          = openstack_compute_keypair_v2.project_keypair.name
+  security_groups   = ["default"]
+  availability_zone = var.availability_zone
+  force_delete      = true
+  depends_on = [
+    openstack_networking_router_interface_v2.router_interface_1
+  ]
+  network {
+    name = openstack_networking_network_v2.network_1.name
+  }
+
+}
+
+resource "openstack_compute_instance_v2" "db_proxy" {
+  name              = "db_proxy"
   image_id          = var.image_id
   flavor_id         = var.flavor_id
   key_pair          = openstack_compute_keypair_v2.project_keypair.name

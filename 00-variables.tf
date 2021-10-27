@@ -1,7 +1,3 @@
-variable "image" {
-    type = string
-    default = "Ubuntu 20.04"
-}
 
 variable "external_network_id" {
   type    = string
@@ -11,14 +7,19 @@ variable "availability_zone" {
   type    = string
   default = "Education"
 }
-variable "key_pair"{
-    type = string
-    default = "rb222rx_Keypair"
+variable "key_pair" {
+  type    = string
+  default = "mykey"
 }
 variable "image_id" {
-  type = string
-  #default = "4063fb3e-0747-4345-bac8-5a8a9c3aa74e"
-  default = "ca4bec1a-ac25-434f-b14c-ad8078ccf39f"
+  type    = string
+  default = "5e516bba-bd16-42b1-8010-ab11375447fe"
+
+}
+
+variable "wordpress_image_id" {
+  type    = string
+  default = "c3d48704-1740-47f1-91d0-7a0f58961094"
 }
 variable "flavor_id" {
   type    = string
@@ -40,7 +41,7 @@ variable "subnet_name" {
 variable "wordpress_instances" {
   type        = number
   description = "The Number of instances to be created."
-  default     = 3
+  default     = 4
 }
 
 variable "floating_ip_pool" {

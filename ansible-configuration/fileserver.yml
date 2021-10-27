@@ -26,3 +26,25 @@
       template: src=./exports/nfs_exports.j2 dest=/etc/exports owner=root group=root
     - name: restart nfs server
       service: name=nfs-kernel-server state=restarted
+    
+    - name: Creates www  directory for html files.
+      file:
+        path: "{{ mount_path }}/www"
+        state: directory
+        mode: '0755'
+
+    - name: install acme wordpress and unarchive it
+      unarchive:
+        src: https://github.com/2dv514/syllabus/blob/master/examination/part_2/acme_wordpress_files_and_data.tar.gz?raw=true
+        dest: "{{ mount_path }}/www"
+        remote_src: yes
+
+    - name: Unzip wordpress files
+      unarchive:
+        src: "{{ mount_path }}/www/acme_wordpress_files.tar.gz"
+        dest: "{{ mount_path }}/www"
+        creates: "{{ mount_path }}/www/wp-config.php"
+        remote_src: yes
+        mode: '0755'
+     
+   

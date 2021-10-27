@@ -6,10 +6,18 @@
       apt:
         name: ['nginx']
         state: latest
-    - name: Copy nginx.conf
+    - name: Copy nginx.conf to http balancer
       copy:
         src: ./exports/nginx.conf.j2
         dest: /etc/nginx/nginx.conf
+      when: balancing_role == "http"
+
+    - name: Copy nginx.conf to sql balancer
+      copy:
+        src: ./exports/db_loadbalancer.conf.j2
+        dest: /etc/nginx/nginx.conf
+      when: balancing_role == "sql"
     - name: restart nginx server
       service: name=nginx state=restarted
+
 

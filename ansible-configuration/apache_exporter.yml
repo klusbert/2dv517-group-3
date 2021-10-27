@@ -11,14 +11,24 @@
         file:
           path: ~/go
           state: directory
+          mode: 0775
+      - name: Make directory go bin
+        file:
+          path: ~/go/bin
+          state: directory
+          mode: 0775
       - name: Export GOPATH
-        shell: GOPATH=~/go
+        become: False
+        shell: export GOPATH=$HOME/go
       - name: Export PATH
-        shell: PATH=ubuntu:{{word_press}}/bin:~/go/bin
-      #- name: Reload config
-      #  shell: source ~/.bashrc
+        become: False
+        shell: export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+      - name: Reload config
+        shell: source ~/.bashrc
+        args:
+          executable: /bin/bash
       - name: Install
-        shell: go get https://github.com/Lusitaniae/apache_exporter.git
+        shell: go get github.com/Lusitaniae/apache_exporter
       - name: Create soft link
         shell: ln -s ~/go/bin/apache_exporter /usr/bin
       - name: Create upstart config

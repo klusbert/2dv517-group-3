@@ -5,6 +5,8 @@ After=network.target
 [Service]
 Type=simple
 ExecStart=/usr/local/bin/apache_exporter
+Restart=on-failure
+RestartSec=5s
 
 [Install]
 WantedBy=multi-user.target

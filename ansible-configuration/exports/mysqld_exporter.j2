@@ -1,10 +1,10 @@
 [Unit]
-Description=Node Exporter
+Description=Mysqld Exporter
 After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/node_exporter
+ExecStart=/usr/local/bin/mysqld_exporter
 Restart=on-failure
 RestartSec=5s
 

@@ -23,4 +23,5 @@
 - import_playbook: "wordpress.yml"
 - import_playbook: "node_exporter.yml"
 - import_playbook: "apache_exporter.yml"
+- import_playbook: "mysqld_exporter.yml"
 

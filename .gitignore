@@ -40,3 +40,12 @@ terraform.rc
 
 #Ignore personal openrc.sh
 *openrc.sh
+
+# Ignore generated templates
+ansible-configuration/exports/db_loadbalancer.conf.j2
+ansible-configuration/exports/hosts.j2
+ansible-configuration/exports/nginx.conf.j2
+ansible-configuration/exports/prometheus.yml.j2
+ansible-configuration/group_vars/all.yml
+ansible-configuration/inventory.cfg
+

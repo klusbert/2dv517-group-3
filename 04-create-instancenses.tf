@@ -1,5 +1,5 @@
 resource "openstack_compute_instance_v2" "word_press" {
-  image_id          = var.wordpress_image_id
+  image_id          = var.image_id
   flavor_id         = var.flavor_id
   key_pair          = openstack_compute_keypair_v2.project_keypair.name
   count             = var.wordpress_instances
@@ -66,7 +66,9 @@ resource "openstack_compute_instance_v2" "monitoring" {
   image_id          = var.image_id
   flavor_id         = var.flavor_id
   key_pair          = openstack_compute_keypair_v2.project_keypair.name
+
   security_groups   = ["default", openstack_compute_secgroup_v2.prometheus.id, openstack_compute_secgroup_v2.ssh.id, openstack_compute_secgroup_v2.icmp.id]
+
   availability_zone = var.availability_zone
   depends_on = [
     openstack_networking_router_interface_v2.router_interface_1
@@ -106,5 +108,4 @@ resource "openstack_compute_instance_v2" "db_proxy" {
   network {
     name = openstack_networking_network_v2.network_1.name
   }
-
 }

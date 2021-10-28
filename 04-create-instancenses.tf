@@ -1,5 +1,5 @@
 resource "openstack_compute_instance_v2" "word_press" {
-  image_id          = var.wordpress_image_id
+  image_id          = var.image_id
   flavor_id         = var.flavor_id
   key_pair          = openstack_compute_keypair_v2.project_keypair.name
   count             = var.wordpress_instances

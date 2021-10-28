@@ -3,45 +3,38 @@
     become: True
     become_user: root
     tasks:
-      - name: Install  golang
-        apt:
-          name: golang
-          state: present
-      - name: Make directory go
-        file:
-          path: ~/go
-          state: directory
-          mode: 0775
-      - name: Make directory go bin
-        file:
-          path: ~/go/bin
-          state: directory
-          mode: 0775
-      - name: Export GOPATH
-        become: False
-        shell: export GOPATH=$HOME/go
-      - name: Export PATH
-        become: False
-        shell: export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-      - name: Reload config
-        shell: source ~/.bashrc
-        args:
-          executable: /bin/bash
-      - name: Install
-        shell: go get github.com/Lusitaniae/apache_exporter
-      - name: Create soft link
-        shell: ln -s ~/go/bin/apache_exporter /usr/bin
-      - name: Create upstart config
-        template:
-          src: exports/apache_exporter.conf.j2
-          dest: /etc/init/apache_exporter.conf
-          owner: root
-          group: root
-          mode: 0600
-      - name: Start apache service
-        systemd:
-          daemon_reload: yes
-          enabled: yes
-          state: started
-          name: apache_exporter.service
+    - name: download apache exporter
+      get_url:
+        url: https://github.com/Lusitaniae/apache_exporter/releases/download/v0.10.1/apache_exporter-0.10.1.linux-amd64.tar.gz
+        dest: /tmp
+    - name: unarchive apache exporter
+      unarchive:
+        remote_src: yes
+        src: /tmp/apache_exporter-0.10.1.linux-amd64.tar.gz
+        dest: /tmp
+    - name: move apache exporter to /usr/local/bin
+      copy:
+        src: /tmp/apache_exporter-0.10.1.linux-amd64/apache_exporter
+        dest: /usr/local/bin/apache_exporter
+        remote_src: yes
+        owner: root
+        group: root
+        mode: 0755
+    - name: install unit file to systemd
+      template:
+        src: exports/apache_exporter.j2
+        dest: /etc/systemd/system/apache_exporter.service
+        owner: root
+        group: root
+        mode: 0600
+    - name: configure systemd to use service
+      systemd:
+        daemon_reload: yes
+        enabled: yes
+        state: started
+        name: apache_exporter.service
+    - name: Enable service httpd and ensure it is not masked
+      ansible.builtin.systemd:
+        name: apache_exporter
+        enabled: yes
 

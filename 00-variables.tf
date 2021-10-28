@@ -13,7 +13,7 @@ variable "key_pair" {
 }
 variable "image_id" {
   type    = string
-  default = "5e516bba-bd16-42b1-8010-ab11375447fe"
+  default = "ca4bec1a-ac25-434f-b14c-ad8078ccf39f"
 
 }
 

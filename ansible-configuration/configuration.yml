@@ -22,5 +22,6 @@
 - import_playbook: "loadbalancer.yml"
 - import_playbook: "wordpress.yml"
 - import_playbook: "node_exporter.yml"
+- import_playbook: "apache_exporter.yml"
 - import_playbook: "prometheus.yml"
 

@@ -1,3 +1,4 @@
+# node exporter
 ---
 - hosts: all, !monitoring
   become: True
@@ -33,5 +34,9 @@
         enabled: yes
         state: started
         name: node_exporter.service
+    - name: Enable service httpd and ensure it is not masked
+      ansible.builtin.systemd:
+        name: node_exporter
+        enabled: yes
 
 

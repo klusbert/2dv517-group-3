@@ -1,3 +1,4 @@
+# node exporter
 ---
 - hosts: all, !monitoring
   become: True

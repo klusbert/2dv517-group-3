@@ -87,3 +87,17 @@ resource "local_file" "password_output" {
   filename = "./secrets/db_password.yml"
 }
 
+resource "local_file" "monitoring" {
+  content = templatefile("./template/prometheus.tmpl",
+    {
+      db_master                 = openstack_compute_instance_v2.db_master.access_ip_v4,
+      db_slave                  = openstack_compute_instance_v2.db_slave.access_ip_v4,
+      fileserver                = openstack_compute_instance_v2.fileserver.access_ip_v4,
+      load_balancer             = openstack_compute_instance_v2.load_balancer.access_ip_v4,
+      word_press_1              = openstack_compute_instance_v2.word_press.0.access_ip_v4,
+      word_press_2              = openstack_compute_instance_v2.word_press.1.access_ip_v4,
+      word_press_3              = openstack_compute_instance_v2.word_press.2.access_ip_v4,
+    }
+  )
+  filename = "./ansible-configuration/exports/prometheus.yml.j2"
+}

@@ -6,6 +6,17 @@
   vars_files:
   - ../secrets/passwords.yml
   vars:
+
+    prometheus_scrape_configs:
+    - job_name: "apache"
+      file_sd_configs:
+      - files:
+        - "/etc/prometheus/file_sd/apache.yml"
+    - job_name: "node"
+      file_sd_configs:
+      - files:
+        - "/etc/prometheus/file_sd/node.yml"
+
     prometheus_targets:
       node:
       - targets:
@@ -17,6 +28,13 @@
         - "{{word_press_01}}:9100"
         - "{{word_press_02}}:9100"
         - "{{word_press_03}}:9100"
+      apache:
+      - targets:
+        - "{{word_press_01}}:9117"
+        - "{{word_press_02}}:9117"
+        - "{{word_press_03}}:9117"
+
+
 
     grafana_security:
       admin_user: admin

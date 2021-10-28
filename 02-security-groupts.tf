@@ -36,6 +36,7 @@ resource "openstack_compute_secgroup_v2" "ssh" {
     ip_protocol = "tcp"
     cidr        = "0.0.0.0/0"
   }
+}
 resource "openstack_compute_secgroup_v2" "prometheus" {
   name          = "prometheus"
   description   = "ports for prometheus and grafana"
@@ -52,5 +53,3 @@ resource "openstack_compute_secgroup_v2" "prometheus" {
     cidr        = "0.0.0.0/0"
   }
 }
-
-

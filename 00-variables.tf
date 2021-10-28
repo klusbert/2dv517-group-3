@@ -11,9 +11,13 @@ variable "key_pair" {
   type    = string
   default = "oh222gw_Keypair"
 }
-variable "image_id" {
+variable "wordpress_image_id" {
   type    = string
-  default = "ca4bec1a-ac25-434f-b14c-ad8078ccf39f"
+  default = "c3d48704-1740-47f1-91d0-7a0f58961094"
+}
+variable "base_image_id" {
+  type    = string
+  default = "5e516bba-bd16-42b1-8010-ab11375447fe"
 }
 
 variable "flavor_id" {

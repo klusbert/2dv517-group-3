@@ -1,5 +1,5 @@
 resource "openstack_compute_instance_v2" "word_press" {
-  image_id          = var.image_id
+  image_id          = var.wordpress_image_id
   flavor_id         = var.flavor_id
   key_pair          = openstack_compute_keypair_v2.project_keypair.name
   count             = var.wordpress_instances
@@ -17,7 +17,7 @@ resource "openstack_compute_instance_v2" "word_press" {
 
 resource "openstack_compute_instance_v2" "db_master" {
   name              = "db_master"
-  image_id          = var.image_id
+  image_id          = var.base_image_id
   flavor_id         = var.flavor_id
   key_pair          = openstack_compute_keypair_v2.project_keypair.name
   availability_zone = var.availability_zone
@@ -32,7 +32,7 @@ resource "openstack_compute_instance_v2" "db_master" {
 
 resource "openstack_compute_instance_v2" "db_slave" {
   name              = "db_slave"
-  image_id          = var.image_id
+  image_id          = var.base_image_id
   flavor_id         = var.flavor_id
   key_pair          = openstack_compute_keypair_v2.project_keypair.name
   availability_zone = var.availability_zone
@@ -48,7 +48,7 @@ resource "openstack_compute_instance_v2" "db_slave" {
 
 resource "openstack_compute_instance_v2" "load_balancer" {
   name              = "load_balancer"
-  image_id          = var.image_id
+  image_id          = var.base_image_id
   flavor_id         = var.flavor_id
   key_pair          = openstack_compute_keypair_v2.project_keypair.name
   security_groups   = ["default", openstack_compute_secgroup_v2.http.id, openstack_compute_secgroup_v2.ssh.id, openstack_compute_secgroup_v2.icmp.id]
@@ -63,7 +63,7 @@ resource "openstack_compute_instance_v2" "load_balancer" {
 
 resource "openstack_compute_instance_v2" "monitoring" {
   name              = "monitoring"
-  image_id          = var.image_id
+  image_id          = var.base_image_id
   flavor_id         = var.flavor_id
   key_pair          = openstack_compute_keypair_v2.project_keypair.name
 
@@ -81,7 +81,7 @@ resource "openstack_compute_instance_v2" "monitoring" {
 
 resource "openstack_compute_instance_v2" "fileserver" {
   name              = "fileserver"
-  image_id          = var.image_id
+  image_id          = var.base_image_id
   flavor_id         = var.flavor_id
   key_pair          = openstack_compute_keypair_v2.project_keypair.name
   security_groups   = ["default"]
@@ -97,7 +97,7 @@ resource "openstack_compute_instance_v2" "fileserver" {
 
 resource "openstack_compute_instance_v2" "db_proxy" {
   name              = "db_proxy"
-  image_id          = var.image_id
+  image_id          = var.base_image_id
   flavor_id         = var.flavor_id
   key_pair          = openstack_compute_keypair_v2.project_keypair.name
   security_groups   = ["default"]

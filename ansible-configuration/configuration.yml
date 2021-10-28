@@ -10,14 +10,12 @@
       apt:
         name: "*"
         state: latest
-
     - name: Copy host file to /etc/hosts
       copy:
         src: ./exports/hosts.j2
         dest: /etc/hosts
 
 - import_playbook: "fileserver.yml"
-- import_playbook: "mountnfs.yml"
 - import_playbook: "db.yml"
 - import_playbook: "loadbalancer.yml"
 - import_playbook: "wordpress.yml"

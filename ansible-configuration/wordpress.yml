@@ -3,14 +3,15 @@
   become: true
   vars_files:
   - ./group_vars/wordpress_default_vars.yml
-  - ../secrets/db_password.yml
+  - ../secrets/passwords.yml
   tasks:
-  - name: install php and packages
-    package: name={{ php_modules }} update_cache=yes state=latest
-
-  - name: install Apache
-    apt: name=apache2 update_cache=yes state=latest
-
+ 
+  - name: "Mount nfs server"
+    mount: 
+      src: "fileserver:{{mount_path}}" 
+      path: /home/ubuntu/nfs_fileserver
+      fstype: nfs
+      state: mounted
 
   - name: Replace existing wp-config.php
     template:

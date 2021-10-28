@@ -2,7 +2,7 @@
 - hosts: database
   become: true
   vars_files:
-    - ../secrets/db_password.yml
+    - ../secrets/passwords.yml
     - ./group_vars/all.yml
   tasks:
     - name: Install ansible mysql dependency

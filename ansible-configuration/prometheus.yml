@@ -1,36 +1,44 @@
 ---
 - hosts: monitoring
-  become: True
-  become_user: root
-  tasks:
-    - name: Downloading prometheus
-      get_url:
-        url: https://github.com/prometheus/prometheus/releases/download/v2.30.3/prometheus-2.30.3.linux-amd64.tar.gz
-        dest: /tmp
-    - name: Unpacking prometheus
-      unarchive:
-        remote_src: yes
-        src: /tmp/prometheus-2.30.3.linux-amd64.tar.gz
-        dest: /tmp
-    - name: add prometheus configuration
-      template:
-        src: exports/prometheus.yml.j2
-        dest: /tmp/prometheus.yml
-        owner: root
-        group: root
-        mode: 0755
-    - name: install unit file to systemd
-      template:
-        src: exports/prometheus.j2
-        dest: /etc/systemd/system/prometheus.service
-        owner: root
-        group: root
-        mode: 0600
-    - name: configure systemd to use service
-      systemd:
-        daemon_reload: yes
-        enabled: yes
-        state: started
-        name: prometheus.service
+  roles:
+  - cloudalchemy.prometheus  
+  - cloudalchemy.grafana 
+  vars_files:
+  - ../secrets/passwords.yml
+  vars:
+    prometheus_targets:
+      node:
+      - targets:
+        - "{{db_master}}:9100"
+        - "{{db_slave}}:9100"
+        - "{{db_proxy}}:9100"
+        - "{{fileserver}}:9100"
+        - "{{load_balancer}}:9100"
+        - "{{word_press_01}}:9100"
+        - "{{word_press_02}}:9100"
+        - "{{word_press_03}}:9100"
 
+    grafana_security:
+      admin_user: admin
+      admin_password: "{{grafana_admin_password}}"
+    grafana_datasources:
+      - name: prometheus
+        type: prometheus
+        access: proxy
+        url: 'http://localhost:9090'
+        basicAuth: false
+    grafana_dashboards:
+      - dashboard_id: 13978
+        revision_id: 1
+        datasource: prometheus
+      - dashboard_id: 3894
+        revision_id: 2
+        datasource: prometheus
+  
+    
+        
+  
 
+   
+   
+   

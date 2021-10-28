@@ -69,7 +69,7 @@ resource "openstack_compute_instance_v2" "monitoring" {
   image_id          = var.image_id
   flavor_id         = var.flavor_id
   key_pair          = openstack_compute_keypair_v2.project_keypair.name
-  security_groups   = ["default", openstack_compute_secgroup_v2.http.name, openstack_compute_secgroup_v2.ssh.name, openstack_compute_secgroup_v2.icmp.name]
+  security_groups   = ["default", openstack_compute_secgroup_v2.http.name, openstack_compute_secgroup_v2.ssh.name, openstack_compute_secgroup_v2.icmp.name, openstack_compute_secgroup_v2.monitoring.name]
   availability_zone = var.availability_zone
   force_delete      = true
   depends_on = [
@@ -112,5 +112,4 @@ resource "openstack_compute_instance_v2" "db_proxy" {
   network {
     name = openstack_networking_network_v2.network_1.name
   }
-
 }

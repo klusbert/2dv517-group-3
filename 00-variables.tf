@@ -9,18 +9,13 @@ variable "availability_zone" {
 }
 variable "key_pair" {
   type    = string
-  default = "mykey"
+  default = "oh222gw_Keypair"
 }
 variable "image_id" {
   type    = string
   default = "ca4bec1a-ac25-434f-b14c-ad8078ccf39f"
-
 }
 
-variable "wordpress_image_id" {
-  type    = string
-  default = "c3d48704-1740-47f1-91d0-7a0f58961094"
-}
 variable "flavor_id" {
   type    = string
   default = "c1-r1-d10"

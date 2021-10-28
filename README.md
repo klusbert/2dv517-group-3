@@ -28,5 +28,8 @@
 | Community.Mysql | ansible-galaxy collection install community.mysql |
 |                 |                                                   |
 |                 |                                                   |
+
+ansible-galaxy install cloudalchemy.grafana
+ansible-galaxy install cloudalchemy.prometheus
 ### Terraform - Version 1.0.8
 

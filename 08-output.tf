@@ -82,8 +82,11 @@ resource "local_file" "db_loadbalancer" {
 
 resource "local_file" "password_output" {
   content = templatefile("./template/password.tmpl",
-    { password = random_password.db_password.result }
+    { 
+      root_password = random_password.db_password.result,
+      grafana_admin_password = random_password.grafana_password.result
+    }
   )
-  filename = "./secrets/db_password.yml"
+  filename = "./secrets/passwords.yml"
 }
 

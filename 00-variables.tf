@@ -7,10 +7,6 @@ variable "availability_zone" {
   type    = string
   default = "Education"
 }
-variable "key_pair" {
-  type    = string
-  default = "oh222gw_Keypair"
-}
 variable "wordpress_image_id" {
   type    = string
   default = "c3d48704-1740-47f1-91d0-7a0f58961094"

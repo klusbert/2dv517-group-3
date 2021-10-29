@@ -15,7 +15,7 @@ resource "null_resource" "provisioner" {
 
   provisioner "local-exec" {
     command = "ansible-playbook -i './ansible-configuration/inventory.cfg' ./ansible-configuration/configuration.yml"
-    #command = "ansible-playbook -i './ansible-configuration/inventory.cfg' ./ping.yml"
+    #command = "ansible-playbook -i './ansible-configuration/inventory.cfg' ./ping.yml" # testing only
   }
 }
 

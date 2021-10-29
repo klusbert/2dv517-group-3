@@ -8,7 +8,7 @@ resource "openstack_compute_secgroup_v2" "http" {
     cidr        = "0.0.0.0/0"
   }
     rule {
-    from_port   = 443
+    from_port   = 443# not used for this project
     to_port     = 443
     ip_protocol = "tcp"
     cidr        = "0.0.0.0/0"
@@ -18,7 +18,7 @@ resource "openstack_compute_secgroup_v2" "http" {
 
 resource "openstack_compute_secgroup_v2" "icmp" {
   name          = "ICMP"
-  description   = "ICMP rules for ping"
+  description   = "ICMP rules for ping" # testing only
   rule {
     from_port   = -1
     to_port     = -1
@@ -41,13 +41,13 @@ resource "openstack_compute_secgroup_v2" "prometheus" {
   name          = "prometheus"
   description   = "ports for prometheus and grafana"
   rule {
-    from_port   = 9090
+    from_port   = 9090 #prometheus
     to_port     = 9090
     ip_protocol = "tcp"
     cidr        = "0.0.0.0/0"
   }
     rule {
-    from_port   = 3000
+    from_port   = 3000 #grafana
     to_port     = 3000
     ip_protocol = "tcp"
     cidr        = "0.0.0.0/0"

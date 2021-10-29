@@ -1,3 +1,4 @@
+# Creates a ansible inventory. file
 resource "local_file" "AnsibleInventory" {
   content = templatefile("./template/inventory.tmpl",
     {
@@ -15,6 +16,7 @@ resource "local_file" "AnsibleInventory" {
   filename = "./ansible-configuration/inventory.cfg"
 }
 
+# Generates a hostfiles for discovery
 resource "local_file" "HostFile" {
   content = templatefile("./template/hosts.tmpl",
     {
@@ -39,6 +41,7 @@ resource "local_file" "DeviceFile" {
   filename = "./ansible-configuration/group_vars/fileserver.yml"
 }
 
+# Creates a ansible variables file
 resource "local_file" "AnsibleVariables" {
   content = templatefile("./template/all.tmpl",
     { username                  = "ubuntu",
@@ -61,15 +64,12 @@ resource "local_file" "AnsibleVariables" {
 resource "local_file" "nginx_loadbalancer" {
   content = templatefile("./template/load_balancer.tmpl",
     {
-
       word_press = openstack_compute_instance_v2.word_press.*,
-
-
     }
   )
   filename = "./ansible-configuration/exports/nginx.conf.j2"
 }
-
+# Creates a nginx config for db_proxy
 resource "local_file" "db_loadbalancer" {
   content = templatefile("./template/db_loadbalancer.tmpl",
     {
@@ -80,6 +80,7 @@ resource "local_file" "db_loadbalancer" {
   filename = "./ansible-configuration/exports/db_loadbalancer.conf.j2"
 }
 
+#prints out the password for db and grafana in secrets folder.
 resource "local_file" "password_output" {
   content = templatefile("./template/password.tmpl",
     { 
@@ -90,17 +91,3 @@ resource "local_file" "password_output" {
   filename = "./secrets/passwords.yml"
 }
 
-resource "local_file" "monitoring" {
-  content = templatefile("./template/prometheus.tmpl",
-    {
-      db_master                 = openstack_compute_instance_v2.db_master.access_ip_v4,
-      db_slave                  = openstack_compute_instance_v2.db_slave.access_ip_v4,
-      fileserver                = openstack_compute_instance_v2.fileserver.access_ip_v4,
-      load_balancer             = openstack_compute_instance_v2.load_balancer.access_ip_v4,
-      word_press_1              = openstack_compute_instance_v2.word_press.0.access_ip_v4,
-      word_press_2              = openstack_compute_instance_v2.word_press.1.access_ip_v4,
-      word_press_3              = openstack_compute_instance_v2.word_press.2.access_ip_v4,
-    }
-  )
-  filename = "./ansible-configuration/exports/prometheus.yml.j2"
-}

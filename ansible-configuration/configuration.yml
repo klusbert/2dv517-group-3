@@ -10,6 +10,7 @@
       apt:
         name: "*"
         state: latest
+
     - name: Copy host file to /etc/hosts
       copy:
         src: ./exports/hosts.j2

@@ -20,19 +20,19 @@
     prometheus_targets:
       node:
       - targets:
-        - "{{db_master}}:9100"
-        - "{{db_slave}}:9100"
-        - "{{db_proxy}}:9100"
-        - "{{fileserver}}:9100"
-        - "{{load_balancer}}:9100"
-        - "{{word_press_01}}:9100"
-        - "{{word_press_02}}:9100"
-        - "{{word_press_03}}:9100"
+        - "db_master:9100"
+        - "db_slave:9100"
+        - "db_proxy:9100"
+        - "fileserver:9100"
+        - "load_balancer:9100"
+        - "word_press_01:9100"
+        - "word_press_02:9100"
+        - "word_press_03:9100"
       apache:
       - targets:
-        - "{{word_press_01}}:9117"
-        - "{{word_press_02}}:9117"
-        - "{{word_press_03}}:9117"
+        - "word_press_01:9117"
+        - "word_press_02:9117"
+        - "word_press_03:9117"
 
 
 
@@ -45,13 +45,15 @@
         access: proxy
         url: 'http://localhost:9090'
         basicAuth: false
+        
     grafana_dashboards:
       - dashboard_id: 13978
         revision_id: 1
         datasource: prometheus
       - dashboard_id: 3894
-        revision_id: 2
+        revision_id: 6
         datasource: prometheus
+      #https://grafana.com/grafana/dashboards/11269
   
     
         

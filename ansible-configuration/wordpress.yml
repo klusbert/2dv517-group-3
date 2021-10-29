@@ -5,7 +5,17 @@
   - ./group_vars/wordpress_default_vars.yml
   - ../secrets/passwords.yml
   tasks:
- 
+  - name: Enable the Apache2 module wsgi
+    community.general.apache2_module:
+      state: present
+      name  : status
+
+  - name: Modify status.conf
+    template:
+      src: "exports/status.conf.j2"
+      dest: "/etc/apache2/mods-available/status.conf"
+    notify: reload-apache
+
   - name: "Mount nfs server"
     mount: 
       src: "fileserver:{{mount_path}}" 

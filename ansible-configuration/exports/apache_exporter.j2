@@ -4,9 +4,17 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/apache_exporter
-Restart=on-failure
-RestartSec=5s
+User=ubuntu
+Group=ubuntu
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/apache_exporter \
+  --insecure \
+  --scrape_uri=http://localhost/server-status?auto \
+  --telemetry.address=0.0.0.0:9117 \
+  --telemetry.endpoint=/metrics
+
+SyslogIdentifier=apache_exporter
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

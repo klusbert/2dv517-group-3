@@ -3,23 +3,24 @@
 username: ubuntu
 mount_path: /mnt/nfs_share
 www_folder: /home/ubuntu/nfs_fileserver/www
+cidr: 192.168.199.0/24
 
 #Floating ips
-load_balancer_floating: 194.47.177.66
-monitoring_floating: 194.47.177.49
+load_balancer_floating: 194.47.176.218
+monitoring_floating: 194.47.177.66
 
 
 #private ips
-db_master: 192.168.199.12
-db_slave: 192.168.199.7
-db_proxy: 192.168.199.16
-monitoring: 192.168.199.9 
-fileserver: 192.168.199.8 
-load_balancer: 192.168.199.15
+db_master: 192.168.199.10
+db_slave: 192.168.199.9
+db_proxy: 192.168.199.8
+monitoring: 192.168.199.15 
+fileserver: 192.168.199.11 
+load_balancer: 192.168.199.12
 
-word_press_01: 192.168.199.13 
-word_press_02: 192.168.199.6 
-word_press_03: 192.168.199.14 
+word_press_01: 192.168.199.6 
+word_press_02: 192.168.199.7 
+word_press_03: 192.168.199.5 
 
 db_username: wordpress
 database_name: wordpress

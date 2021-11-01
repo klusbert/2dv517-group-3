@@ -5,6 +5,12 @@
     - ../secrets/passwords.yml
     - ./group_vars/all.yml
   tasks:
+
+
+    - name: Update cache
+      apt:
+        update_cache: yes
+        
     - name: Install ansible mysql dependency
       apt:
         name: python3-mysqldb
@@ -16,6 +22,7 @@
     - name: install mqsql client
       action: apt pkg=mysql-client state=present
 
+      
     - name: copy global mysqld.cnf
       template:
         src: ./exports/mysqld.cnf.j2

@@ -13,9 +13,13 @@ variable "wordpress_image_id" {
 }
 variable "base_image_id" {
   type    = string
-  default = "5e516bba-bd16-42b1-8010-ab11375447fe"
+  default = "82753264-5244-4903-98a7-db0377915d32"
 }
 
+variable "db_image_id" {
+  type    = string
+  default = "665ee4e3-fcb9-47f4-8524-78165f07da65"
+}
 variable "flavor_id" {
   type    = string
   default = "c1-r1-d10"

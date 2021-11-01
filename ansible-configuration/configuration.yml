@@ -1,15 +1,14 @@
 ---
 - hosts: all
   become: true
+  gather_facts: no # important to not gather_facts when waiting for connection, we do that later.
   tasks:
-    - name: Update cache
-      apt:
-        update_cache: yes
+  
+    - name: Wait for system to become reachable
+      wait_for_connection:
 
-    - name: Upgrade all packages on servers
-      apt:
-        name: "*"
-        state: latest
+    - name: Gather facts for first time
+      setup:
 
     - name: Copy host file to /etc/hosts
       copy:

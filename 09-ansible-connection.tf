@@ -1,14 +1,15 @@
-resource "time_sleep" "wait_30_seconds" {
-  depends_on = [local_file.AnsibleInventory]
-
-  create_duration = "30s"
-}
-
-
 
 resource "null_resource" "provisioner" {
-
-  depends_on = [time_sleep.wait_30_seconds]
+  depends_on = [
+                openstack_compute_floatingip_associate_v2.fip_1,
+                local_file.AnsibleInventory,
+                local_file.HostFile,
+                local_file.password_output,
+                local_file.DeviceFile,
+                local_file.AnsibleVariables,
+                local_file.nginx_loadbalancer,
+                local_file.db_loadbalancer               
+                ]
   triggers = {
     always_run = "${timestamp()}"
   }

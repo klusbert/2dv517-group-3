@@ -9,11 +9,11 @@ variable "availability_zone" {
 }
 variable "wordpress_image_id" {
   type    = string
-  default = "c3d48704-1740-47f1-91d0-7a0f58961094"
+  default = "4d3da9b5-ccf0-4341-97f5-8fb04de016a0"
 }
 variable "base_image_id" {
   type    = string
-  default = "82753264-5244-4903-98a7-db0377915d32"
+  default = "d9d4c4c1-aa68-41e3-bf2e-a6afb5a69a52"
 }
 
 variable "db_image_id" {

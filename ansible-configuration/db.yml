@@ -6,11 +6,6 @@
     - ./group_vars/all.yml
   tasks:
 
-
-    - name: Update cache
-      apt:
-        update_cache: yes
-        
     - name: Install ansible mysql dependency
       apt:
         name: python3-mysqldb

@@ -16,7 +16,6 @@
 
     - name: install mqsql client
       action: apt pkg=mysql-client state=present
-
       
     - name: copy global mysqld.cnf
       template:

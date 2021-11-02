@@ -9,17 +9,19 @@ variable "availability_zone" {
 }
 variable "wordpress_image_id" {
   type    = string
-  default = "4d3da9b5-ccf0-4341-97f5-8fb04de016a0"
+  default = "377f4508-7aaa-4245-8253-5d518606c3bc"
 }
-variable "base_image_id" {
-  type    = string
-  default = "d9d4c4c1-aa68-41e3-bf2e-a6afb5a69a52"
-}
-
 variable "db_image_id" {
   type    = string
-  default = "665ee4e3-fcb9-47f4-8524-78165f07da65"
+  default = "ab3620e2-f8e9-4747-95d0-aaf76e392d9d"
 }
+
+variable "base_image_id" {
+  type    = string
+  default = "c1feccfc-e739-4899-82af-ecb42f9609ad"
+}
+
+
 variable "flavor_id" {
   type    = string
   default = "c1-r1-d10"

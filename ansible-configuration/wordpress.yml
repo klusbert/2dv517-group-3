@@ -5,6 +5,13 @@
   - ./group_vars/wordpress_default_vars.yml
   - ../secrets/passwords.yml
   tasks:
+
+  - name: install php and packages
+    package: name={{ php_modules }} update_cache=yes state=latest
+
+  - name: install Apache
+    apt: name=apache2 update_cache=yes state=latest
+
   - name: Enable the Apache2 module wsgi
     community.general.apache2_module:
       state: present

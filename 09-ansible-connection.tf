@@ -2,6 +2,7 @@
 resource "null_resource" "provisioner" {
   depends_on = [
                 openstack_compute_floatingip_associate_v2.fip_1,
+                openstack_compute_floatingip_associate_v2.fip_2,
                 local_file.AnsibleInventory,
                 local_file.HostFile,
                 local_file.password_output,

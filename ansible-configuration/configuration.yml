@@ -10,6 +10,18 @@
     - name: Gather facts for first time
       setup:
 
+
+
+    - name: Update cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade all packages on servers
+      apt:
+        name: "*"
+        state: latest
+
+        
     - name: Copy host file to /etc/hosts
       copy:
         src: ./exports/hosts.j2
